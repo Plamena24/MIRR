@@ -20,7 +20,8 @@
 #include <Adafruit_PWMServoDriver.h>
 
 // called this way, it uses the default address 0x40
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
+Adafruit_PWMServoDriver pwm0 = Adafruit_PWMServoDriver(0x40);
+Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x41);
 // you can also call it with a different address you want
 //Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 
@@ -38,16 +39,18 @@ void setup() {
   Serial.begin(9600);
   Serial.println("16 channel Servo test!");
 
-  pwm.begin();
+  pwm0.begin();
+  pwm1.begin();
   
-  pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+  pwm0.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+  pwm1.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
 
   yield();
 }
 
 // you can use this function if you'd like to set the pulse length in seconds
 // e.g. setServoPulse(0, 0.001) is a ~1 millisecond pulse width. its not precise!
-void setServoPulse(uint8_t n, double pulse) {
+/*void setServoPulse(uint8_t n, double pulse) {
   double pulselength;
   
   pulselength = 1000000;   // 1,000,000 us per second
@@ -60,21 +63,37 @@ void setServoPulse(uint8_t n, double pulse) {
   Serial.println(pulse);
   pwm.setPWM(n, 0, pulse);
 }
-
+*/
 void loop() {
   // Drive each servo one at a time
   Serial.println(servonum);
+  
   for (uint16_t pulselen = SERVOMIN; pulselen < SERVOMAX; pulselen++) {
-     pwm.setPWM(servonum, 0, pulselen);
+    if (servonum < 16)
+    {
+     pwm0.setPWM(servonum, 0, pulselen);
+    }
+    else
+    {
+      int servonum1 = servonum - 16;
+      pwm1.setPWM(servonum1, 0, pulselen);
+    }
    
   }
-
   delay(500);
   for (uint16_t pulselen = SERVOMAX; pulselen > SERVOMIN; pulselen--) {
-    pwm.setPWM(servonum, 0, pulselen);
+    if (servonum < 16)
+    {
+      pwm0.setPWM(servonum, 0, pulselen);
+    }
+    else
+    {
+      int servonum1 = servonum - 16;
+      pwm1.setPWM(servonum1, 0, pulselen);
+    }
   }
   delay(500);
 
   servonum ++;
-  if (servonum > 15) servonum = 0;
+  if (servonum > 31) servonum = 0;
 }
