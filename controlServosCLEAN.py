@@ -26,14 +26,14 @@ def parseSpeeds(*ghSpeeds):
     parsedSpeeds = [0]*2
 
     ghSpeedsList = list(ghSpeeds)
-    print ghSpeedssList
+    #print ghSpeedsList
 
     for index, speed in enumerate(ghSpeedsList):
         if index < 20:
             parsedSpeeds[0] = 0x00
             parsedSpeeds[1] = speed
             board0speeds.append(parsedSpeeds)
-            print board0speeds
+            #print board0speeds
         elif index > 19 and index < 39:
             parsedSpeeds[0] = 0x01
             parsedSpeeds[1] = speed
@@ -47,8 +47,8 @@ def parseSpeeds(*ghSpeeds):
             parsedSpeeds[1] = speed
             board3speeds.append(parsedSpeeds)
         elif index > 77 and index < 98:
-            parsedSpeed[0] = 0x04
-            parsedSpeed[1] = speed
+            parsedSpeeds[0] = 0x04
+            parsedSpeeds[1] = speed
             board4speeds.append(parsedSpeeds)
         else:
             print "Invalid target index"
@@ -58,14 +58,14 @@ def parseTargets(*ghTargets):
     parsedTargets = [0]*2
 
     ghTargetsList = list(ghTargets)
-    print ghTargetsList
+    #print ghTargetsList
 
     for index, target in enumerate(ghTargetsList):
         if index < 20:
             parsedTargets[0] = 0x00
             parsedTargets[1] = target
             board0targets.append(parsedTargets)
-            print board0targets
+            #print board0targets
         elif index > 19 and index < 39:
             parsedTargets[0] = 0x01
             parsedTargets[1] = target
@@ -103,23 +103,23 @@ class Controller:
 
         for pair in pairList:
             valueList.append(pair[1])
-        print valueList
+        #print valueList
 
         qValueList = [us*4 for us in valueList]
-        print qValueList
+        #print qValueList
 
         for value in qValueList:
             lsb = value & 0x7f #7 bits for least significant byte
             msb = (value >> 7) & 0x7f #shift 7 and take next 7 bits for msb
             cmdSplitList.append(lsb)
             cmdSplitList.append(msb)
-        print cmdSplitList
+        #print cmdSplitList
 
         # Send Pololu intro, device number, command, channel, and target lsb/msb
         multi_target_cmd = [0x1F, num_targets, start_chan]
         cmd_intro = self.PololuCmd + multi_target_cmd
         cmd = cmd_intro + cmdSplitList
-        print cmd
+        #print cmd
 
         self.usb.write(bytes(bytearray(cmd)))
         # # Record Target value
@@ -130,7 +130,7 @@ class Controller:
     # For the standard 1ms pulse width change to move a servo between extremes, a speed
     # of 1 will take 1 minute, and a speed of 60 would take 1 second.
     # Speed of 0 is unrestricted.
-    def setSpeed(self, *speeds):
+    def setSpeeds(self, *speeds):
         
         pairList = list(speeds)
         valueList = []
@@ -138,10 +138,10 @@ class Controller:
 
         for pair in pairList:
             valueList.append(pair[1])
-        print valueList
+        #print valueList
 
         qValueList = [us*4 for us in valueList]
-        print qValueList
+        #print qValueList
 
         # for value in qValueList:
         #     lsb = value & 0x7f #7 bits for least significant byte
@@ -202,5 +202,5 @@ board0 = Controller(0x00)
 parseSpeeds(*speed_val)
 parseTargets(*angle_us1)
 board0.setSpeeds(*board0speeds)
-board0.setTargets(0x62, 0x00,*board0targets)
+board0.setTargets(0x14, 0x00,*board0targets)
 
