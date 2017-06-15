@@ -21,72 +21,6 @@ board4targets = []
 print speed_val
 print angle_us1
 
-def parseSpeeds(*ghSpeeds):
-    global ghSpeedsList, board0speeds, board1speeds, board2speeds, board3speeds, board4speeds
-    parsedSpeeds = [0]*2
-
-    ghSpeedsList = list(ghSpeeds)
-    #print ghSpeedsList
-
-    for index, speed in enumerate(ghSpeedsList):
-        if index < 20:
-            parsedSpeeds[0] = 0x00
-            parsedSpeeds[1] = speed
-            board0speeds.append(parsedSpeeds)
-            #print board0speeds
-        elif index > 19 and index < 39:
-            parsedSpeeds[0] = 0x01
-            parsedSpeeds[1] = speed
-            board1speeds.append(parsedSpeeds)
-        elif index > 38 and index < 59:
-            parsedSpeeds[0] = 0x02
-            parsedSpeeds[1] = speed
-            board2speeds.append(parsedSpeeds)
-        elif index > 58 and index < 78:
-            parsedSpeeds[0] = 0x03
-            parsedSpeeds[1] = speed
-            board3speeds.append(parsedSpeeds)
-        elif index > 77 and index < 98:
-            parsedSpeeds[0] = 0x04
-            parsedSpeeds[1] = speed
-            board4speeds.append(parsedSpeeds)
-        else:
-            print "Invalid target index"
-
-def parseTargets(*ghTargets):
-    global ghTargetsList, board0targets, board1targets, board2targets, board3targets, board4targets
-    parsedTargets = [0]*2
-
-    ghTargetsList = list(ghTargets)
-    #print ghTargetsList
-
-    for index, target in enumerate(ghTargetsList):
-        if index < 20:
-            parsedTargets[0] = 0x00
-            parsedTargets[1] = target
-            board0targets.append(parsedTargets)
-            #print board0targets
-        elif index > 19 and index < 39:
-            parsedTargets[0] = 0x01
-            parsedTargets[1] = target
-            board1targets.append(parsedTargets)
-        elif index > 38 and index < 59:
-            parsedTargets[0] = 0x02
-            parsedTargets[1] = target
-            board2targets.append(parsedTargets)
-        elif index > 58 and index < 78:
-            parsedTargets[0] = 0x03
-            parsedTargets[1] = target
-            board3targets.append(parsedTargets)
-        elif index > 77 and index < 98:
-            parsedTargets[0] = 0x04
-            parsedTargets[1] = target
-            board4targets.append(parsedTargets)
-        else:
-            print "Invalid target index"
-
-
-
 class Controller:
     
     def __init__(self, device_number = 0x00):
@@ -175,32 +109,120 @@ class Controller:
     
 
     def getMovingState(self):
-        pass
-        # cmd = self.PololuCmd + chr(0x13)
-        # self.usb.write(cmd)
-        # if self.usb.read() == chr(0):
-        #     return False
-        # else:
-        #     return True
+        cmd = self.PololuCmd.append(0x13)
+        self.usb.write(cmd)
+        if self.usb.read() == chr(0):
+            return False
+        else:
+            return True
 
-# speed = speed_val * 4
-# out_bytes[4] = speed & 0x7F #Second byte holds the lower 7 bits of speed.
-# out_bytes[5] = (speed >> 7) & 0x7F # Third data byte holds the bits 7-13 of speed.
-# out_bytes[10] = speed & 0x7F #Second byte holds the lower 7 bits of speed.
-# out_bytes[11] = (speed >> 7) & 0x7F # Third data byte holds the bits 7-13 of speed.
+def parseSpeeds(*ghSpeeds):
+    global ghSpeedsList, board0speeds, board1speeds, board2speeds, board3speeds, board4speeds
+    parsedSpeeds = [0]*2
 
-# target1 = angle_us1 * 4
-# target2 = angle_us2 * 4
-# out_bytes[17] = target1 & 0x7F #Second byte holds the lower 7 bits of target.
-# out_bytes[18] = (target1 >> 7) & 0x7F # Third data byte holds the bits 7-13 of target.
-# out_bytes[19] = target2 & 0x7F #Second byte holds the lower 7 bits of target.
-# out_bytes[20] = (target2 >> 7) & 0x7F # Third data byte holds the bits 7-13 of target.
+    ghSpeedsList = list(ghSpeeds)
+    #print ghSpeedsList
 
-# print out_bytes
-# myPort.write(bytes(bytearray(out_bytes)))
+    for index, speed in enumerate(ghSpeedsList):
+        if index < 20:
+            parsedSpeeds[0] = 0x00
+            parsedSpeeds[1] = speed
+            board0speeds.append(parsedSpeeds)
+            #print board0speeds
+        elif index > 19 and index < 39:
+            parsedSpeeds[0] = 0x01
+            parsedSpeeds[1] = speed
+            board1speeds.append(parsedSpeeds)
+        elif index > 38 and index < 59:
+            parsedSpeeds[0] = 0x02
+            parsedSpeeds[1] = speed
+            board2speeds.append(parsedSpeeds)
+        elif index > 58 and index < 78:
+            parsedSpeeds[0] = 0x03
+            parsedSpeeds[1] = speed
+            board3speeds.append(parsedSpeeds)
+        elif index > 77 and index < 98:
+            parsedSpeeds[0] = 0x04
+            parsedSpeeds[1] = speed
+            board4speeds.append(parsedSpeeds)
+        else:
+            print "Invalid target index"
+
+def parseTargets(*ghTargets):
+    global ghTargetsList, board0targets, board1targets, board2targets, board3targets, board4targets
+    parsedTargets = [0]*2
+
+    ghTargetsList = list(ghTargets)
+    #print ghTargetsList
+
+    for index, target in enumerate(ghTargetsList):
+        if index < 20:
+            parsedTargets[0] = 0x00
+            parsedTargets[1] = target
+            board0targets.append(parsedTargets)
+            #print board0targets
+        elif index > 19 and index < 39:
+            parsedTargets[0] = 0x01
+            parsedTargets[1] = target
+            board1targets.append(parsedTargets)
+        elif index > 38 and index < 59:
+            parsedTargets[0] = 0x02
+            parsedTargets[1] = target
+            board2targets.append(parsedTargets)
+        elif index > 58 and index < 78:
+            parsedTargets[0] = 0x03
+            parsedTargets[1] = target
+            board3targets.append(parsedTargets)
+        elif index > 77 and index < 98:
+            parsedTargets[0] = 0x04
+            parsedTargets[1] = target
+            board4targets.append(parsedTargets)
+        else:
+            print "Invalid target index"
+
+def setBoards():
+    parseSpeeds(*speed_val)
+    parseTargets(*angle_us1)
+
+    if board0.getMovingState() is False:
+        board0.setSpeeds(*board0speeds)
+        board0.setTargets(0x14, 0x00,*board0targets)
+    else:
+        print "Board0 still has moving servos"
+
+    if board1.getMovingState() is False:
+        board1.setSpeeds(*board1speeds)
+        board1.setTargets(0x13, 0x00,*board1targets)
+    else:
+        print "Board1 still has moving servos"
+
+    if board2.getMovingState() is False:
+        board2.setSpeeds(*board2speeds)
+        board2.setTargets(0x14, 0x00,*board2targets)
+    else:
+        print "Board2 still has moving servos"
+
+    if board3.getMovingState() is False:
+        board3.setSpeeds(*board3speeds)
+        board3.setTargets(0x13, 0x00,*board3targets)
+    else:
+        print "Board3 still has moving servos"
+
+    if board4.getMovingState() is False:
+        board4.setSpeeds(*board4speeds)
+        board4.setTargets(0x14, 0x00,*board4targets)
+    else:
+        print "Board4 still has moving servos"
+    
+
+
 board0 = Controller(0x00)
-parseSpeeds(*speed_val)
-parseTargets(*angle_us1)
-board0.setSpeeds(*board0speeds)
-board0.setTargets(0x14, 0x00,*board0targets)
+board1 = Controller(0x01)
+board2 = Controller(0x02)
+board3 = Controller(0x03)
+board4 = Controller(0x04)
+
+setBoards()
+
+
 
