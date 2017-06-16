@@ -4,7 +4,6 @@ myPort = scriptcontext.sticky['serialport']
 myPort.flushInput()
 myPort.flushOutput()
 
-# out_bytes = [0xAA, 0x00, 0x07, 0x00, None, None, 0xAA, 0x00, 0x07, 0x01, None, None, 0xAA, 0x00, 0x1F, 0x02, 0x00, None, None, None, None]
 ghSpeedsList = []
 board0speeds = []
 board1speeds = []
@@ -143,13 +142,6 @@ class Controller:
         qValueList = [us*4 for us in valueList]
         #print qValueList
 
-        # for value in qValueList:
-        #     lsb = value & 0x7f #7 bits for least significant byte
-        #     msb = (value >> 7) & 0x7f #shift 7 and take next 7 bits for msb
-        #     cmdSplitList.append(lsb)
-        #     cmdSplitList.append(msb)
-        # print cmdSplitList
-
         # Send Pololu intro, device number, command, channel, and target lsb/msb
         for chan, value in enumerate(qValueList):
             lsb = value & 0x7f #7 bits for least significant byte
@@ -183,24 +175,12 @@ class Controller:
         # else:
         #     return True
 
-# speed = speed_val * 4
-# out_bytes[4] = speed & 0x7F #Second byte holds the lower 7 bits of speed.
-# out_bytes[5] = (speed >> 7) & 0x7F # Third data byte holds the bits 7-13 of speed.
-# out_bytes[10] = speed & 0x7F #Second byte holds the lower 7 bits of speed.
-# out_bytes[11] = (speed >> 7) & 0x7F # Third data byte holds the bits 7-13 of speed.
-
-# target1 = angle_us1 * 4
-# target2 = angle_us2 * 4
-# out_bytes[17] = target1 & 0x7F #Second byte holds the lower 7 bits of target.
-# out_bytes[18] = (target1 >> 7) & 0x7F # Third data byte holds the bits 7-13 of target.
-# out_bytes[19] = target2 & 0x7F #Second byte holds the lower 7 bits of target.
-# out_bytes[20] = (target2 >> 7) & 0x7F # Third data byte holds the bits 7-13 of target.
-
-# print out_bytes
-# myPort.write(bytes(bytearray(out_bytes)))
 board0 = Controller(0x00)
+board1 = Controller(0x01)
 parseSpeeds(*speed_val)
 parseTargets(*angle_us1)
 board0.setSpeeds(*board0speeds)
-board0.setTargets(0x14, 0x00,*board0targets)
+board1.setSpeeds(*board1speeds)
+board0.setTargets(0x14, 0x00, *board0targets)
+board1.setTargets(0x13, 0x00, *board1targets)
 

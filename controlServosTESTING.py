@@ -105,7 +105,7 @@ class Controller:
         moving = [0x13]
         cmd = intro_cmd + moving
         print cmd
-        self.usb.write(cmd)
+        self.usb.write(bytes(bytearray(cmd)))
         
         return False
         # if self.usb.read() == chr(0):
