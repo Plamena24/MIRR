@@ -1,10 +1,30 @@
 import serial
-import scriptcontext
-myPort = scriptcontext.sticky['serialport']
+#import scriptcontext
+#myPort = scriptcontext.sticky['serialport']
+myPort = serial.Serial()
+open = input("Open port?")
+if open == True:
+    try:
+        myPort.baudrate = 9600
+        myPort.port = "COM4"
+        myPort.timeout = 0
+        myPort.open()
+    except:
+        print "Something went wrong. Cannon open port."
+    if myPort.isOpen() == True:
+        print myPort.name + " is open."
+
+if open != True:
+    try:
+        myPort.close()
+    except:
+        print "Something went wrong. Cannot close port."
+    if myPort.isOpen != True:
+        print "Port is closed"
+
 myPort.flushInput()
 myPort.flushOutput()
 
-# out_bytes = [0xAA, 0x00, 0x07, 0x00, None, None, 0xAA, 0x00, 0x07, 0x01, None, None, 0xAA, 0x00, 0x1F, 0x02, 0x00, None, None, None, None]
 ghSpeedsList = []
 board0speeds = []
 board1speeds = []
@@ -17,6 +37,15 @@ board1targets = []
 board2targets = []
 board3targets = []
 board4targets = []
+
+speed_val = [0]*98
+angle_us1 = [0]*98
+
+speed = input("What speed?")
+angle = input("WHat angle?")
+
+speed_val = [speed]*98
+angle_us1 = [angle]*98
 
 print speed_val
 print angle_us1
@@ -230,6 +259,15 @@ board3 = Controller(0x03)
 board4 = Controller(0x04)
 
 setBoards()
+print myPort.read(10)
 
+end_sequence = input("Do you want to close port?")
+if end_sequence == True:
+    try:
+        myPort.close()
+    except: 
+        print "Something went wrong. Cannot close port."
+    if myPort.isOpen != True:
+        print "Port is closed."
 
 
