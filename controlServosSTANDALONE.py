@@ -1,6 +1,13 @@
+
+# Support for the Maestro Pololu line of servo controllers
+# modified from maestro.py by Steven Jacobs -- Aug 2013
+# https://github.com/FRC4564/Maestro/
+
+# this provides support for the Set Multiple Targets command as well as setting speeds on multiple channels
+
+
 import serial
-#import scriptcontext
-#myPort = scriptcontext.sticky['serialport']
+
 myPort = serial.Serial()
 open = input("Open port?")
 if open == True:
@@ -42,7 +49,7 @@ speed_val = [0]*98
 angle_us1 = [0]*98
 
 speed = input("What speed?")
-angle = input("WHat angle?")
+angle = input("What angle?")
 
 speed_val = [speed]*98
 angle_us1 = [angle]*98
@@ -78,17 +85,16 @@ class Controller:
             cmdSplitList.append(msb)
         #print cmdSplitList
 
-        # Send Pololu intro, device number, command, channel, and target lsb/msb
+        # Send Pololu intro, device number, multiple targets command, number of targets, start channel, and targets lsb/msb
         multi_target_cmd = [0x1F, num_targets, start_chan]
         cmd_intro = self.PololuCmd + multi_target_cmd
         cmd = cmd_intro + cmdSplitList
         #print cmd
-
         self.usb.write(bytes(bytearray(cmd)))
         # # Record Target value
         # self.Targets[chan] = target
         
-    # Set speed of channel
+    # Set speeds for all used channels on each board
     # Speed is measured as 0.25microseconds/10milliseconds
     # For the standard 1ms pulse width change to move a servo between extremes, a speed
     # of 1 will take 1 minute, and a speed of 60 would take 1 second.
@@ -135,13 +141,16 @@ class Controller:
         cmd = intro_cmd + moving
         print cmd
         self.usb.write(bytes(bytearray(cmd)))
-        
+        # workaround to make the speed and target assignment to run since the reads are not returning anything
         return False
-        # if self.usb.read() == chr(0):
+        # if self.usb.read() == 0x00:
         #     return False
         # else:
         #     return True
 
+# the parsing functions create the arrays of speeds and targets used for each board
+# both functions take a list of 98 values which is the number of servos used in the project
+# in the full version of the program the lists are generated dynamically - target values for the 98 servos will generally be all different, speeds may or may not be different
 def parseSpeeds(*ghSpeeds):
     global ghSpeedsList, board0speeds, board1speeds, board2speeds, board3speeds, board4speeds
     parsedSpeeds = [0]*2
@@ -259,7 +268,7 @@ board3 = Controller(0x03)
 board4 = Controller(0x04)
 
 setBoards()
-print myPort.read(10)
+print myPort.read()
 
 end_sequence = input("Do you want to close port?")
 if end_sequence == True:
