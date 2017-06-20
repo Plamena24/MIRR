@@ -28,7 +28,7 @@ class Controller:
     def __init__(self,ttyStr='COM6'):
         # Open the command port
         self.usb = serial.Serial(ttyStr)
-        self.usb.timeout = 0
+        #self.usb.timeout = 0
         # Command lead-in and device 12 are sent for each Pololu serial commands.
         self.PololuCmd = chr(0xaa) + chr(0x00)
         # Track target position for each servo. The function isMoving() will
