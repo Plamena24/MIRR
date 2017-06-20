@@ -1,4 +1,5 @@
 import serial
+import base64
 #
 #---------------------------
 # Maestro Servo Controller
@@ -138,8 +139,9 @@ class Controller:
     def getMovingState(self):
         cmd = self.PololuCmd + chr(0x13)
         self.usb.write(cmd)
-        print self.usb.read()
-        if self.usb.read() == chr(0):
+        response = self.usb.read()
+        print(base64.b16encode(response) + "\n")
+        if response == chr(0):
             return False
         else:
             return True
@@ -165,10 +167,11 @@ go_again = input("Enter values?")
 while go_again == "yes":
     speed = input("What speed?")
     target = input("What target?")
-    if board.getMovingState() == False:
+    moving_state = board.getMovingState()
+    if moving_state == False:
         board.setSpeed(0x00, speed)
         board.setTarget(0x00, target)
-    elif board.getMovingState() == True:
+    elif moving_state == True:
         print "Servo still moving"
     else:
         print "Inconclusive"
