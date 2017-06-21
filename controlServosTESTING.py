@@ -56,7 +56,6 @@ class Controller:
         cmd_intro = self.PololuCmd + multi_target_cmd
         cmd = cmd_intro + cmdSplitList
         # print cmd
-        print "Moving servos"
         return cmd
         # self.usb.write(bytes(bytearray(cmd)))
         # myPort.write(bytes(bytearray(cmd)))
@@ -73,6 +72,7 @@ class Controller:
         pairList = list(speeds)
         valueList = []
         cmdSplitList = []
+        speed_cmd = []
 
         for pair in pairList:
             valueList.append(pair[1])
@@ -86,7 +86,9 @@ class Controller:
             msb = (value >> 7) & 0x7f #shift 7 and take next 7 bits for msb
             set_speed_cmd = [0x07, chan, lsb, msb]
             cmd = self.PololuCmd + set_speed_cmd
-            return cmd
+            speed_cmd = speed_cmd + cmd
+        # print speed_cmd
+        return speed_cmd
             # print cmd
 
             # self.usb.write(bytes(bytearray(cmd)))
@@ -230,8 +232,9 @@ def setBoards():
        moving_state4 is False:
         full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
                    targets0 + targets1 + targets2 + targets3 + targets4
-        print full_cmd
-        self.usb.write(bytes(bytearray(cmd)))
+        # print full_cmd
+        myPort.write(bytes(bytearray(full_cmd)))
+        print "Moving servos"
     else:
         print "There are servos still moving."
     
