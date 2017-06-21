@@ -57,7 +57,8 @@ class Controller:
         cmd = cmd_intro + cmdSplitList
         # print cmd
         print "Moving servos"
-        self.usb.write(bytes(bytearray(cmd)))
+        return cmd
+        # self.usb.write(bytes(bytearray(cmd)))
         # myPort.write(bytes(bytearray(cmd)))
         # # Record Target value
         # self.Targets[chan] = target
@@ -85,9 +86,10 @@ class Controller:
             msb = (value >> 7) & 0x7f #shift 7 and take next 7 bits for msb
             set_speed_cmd = [0x07, chan, lsb, msb]
             cmd = self.PololuCmd + set_speed_cmd
+            return cmd
             # print cmd
 
-            self.usb.write(bytes(bytearray(cmd)))
+            # self.usb.write(bytes(bytearray(cmd)))
             # myPort.write(bytes(bytearray(cmd)))
         
 
@@ -159,7 +161,7 @@ def parseSpeeds(*ghSpeeds):
             parsedSpeeds[1] = speed
             board4speeds.append(parsedSpeeds)
         else:
-            print "Invalid target index"
+            print "Invalid speed index."
 
 def parseTargets(*ghTargets):
     global ghTargetsList, board0targets, board1targets, board2targets, board3targets, board4targets
@@ -196,57 +198,42 @@ def parseTargets(*ghTargets):
             parsedTargets[1] = target
             board4targets.append(parsedTargets)
         else:
-            print "Invalid target index"
+            print "Invalid target index."
+
 
 def setBoards():
-
     parseSpeeds(*speed_val)
     parseTargets(*angle_us1)
+
+    speeds0 = board0.setSpeeds(*board0speeds)
+    speeds1 = board1.setSpeeds(*board1speeds)
+    speeds2 = board2.setSpeeds(*board2speeds)
+    speeds3 = board3.setSpeeds(*board3speeds)
+    speeds4 = board4.setSpeeds(*board4speeds)
+          
+    targets0 = board0.setTargets(0x14, 0x00,*board0targets)
+    targets1 = board1.setTargets(0x13, 0x00,*board1targets)
+    targets2 = board2.setTargets(0x14, 0x00,*board2targets) 
+    targets3 = board3.setTargets(0x13, 0x00,*board3targets)
+    targets4 = board4.setTargets(0x14, 0x00,*board4targets)
+
     moving_state0 = board0.getMovingState()
     moving_state1 = board1.getMovingState()
     moving_state2 = board2.getMovingState()
     moving_state3 = board3.getMovingState()
     moving_state4 = board4.getMovingState()
 
-    if moving_state0 is False:
-        board0.setSpeeds(*board0speeds)
-        board0.setTargets(0x14, 0x00,*board0targets)
-    elif moving_state0 is True:
-        print "Board0 still has moving servos"
+    if moving_state0 is False and \
+       moving_state1 is False and \
+       moving_state2 is False and \
+       moving_state3 is False and \
+       moving_state4 is False:
+        full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+                   targets0 + targets1 + targets2 + targets3 + targets4
+        print full_cmd
+        self.usb.write(bytes(bytearray(cmd)))
     else:
-        print "Non conclusive"
-
-    if moving_state1 is False:
-        board1.setSpeeds(*board1speeds)
-        board1.setTargets(0x13, 0x00,*board1targets)
-    elif moving_state1 is True:
-        print "Board1 still has moving servos"
-    else:
-        print "Non conclusive"
-
-    if moving_state2 is False:
-        board2.setSpeeds(*board2speeds)
-        board2.setTargets(0x14, 0x00,*board2targets)
-    elif moving_state2 is True:
-        print "Board2 still has moving servos"
-    else:
-        print "Non conclusive"
-
-    if moving_state3 is False:
-        board3.setSpeeds(*board3speeds)
-        board3.setTargets(0x13, 0x00,*board3targets)
-    elif moving_state3 is True:
-        print "Board3 still has moving servos"
-    else:
-        print "Non conclusive"
-
-    if moving_state4 is False:
-        board4.setSpeeds(*board4speeds)
-        board4.setTargets(0x14, 0x00,*board4targets)
-    elif moving_state4 is True:
-        print "Board4 still has moving servos"
-    else:
-        print "Non conclusive"
+        print "There are servos still moving."
     
 
 
