@@ -1,5 +1,7 @@
 import serial
 import scriptcontext
+import base64
+
 myPort = scriptcontext.sticky['serialport']
 myPort.flushInput()
 myPort.flushOutput()
