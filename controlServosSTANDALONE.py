@@ -7,30 +7,33 @@
 
 
 import serial
+import base64
 
-myPort = serial.Serial()
-open = input("Open port?")
-if open == True:
-    try:
-        myPort.baudrate = 9600
-        myPort.port = "COM4"
-        myPort.timeout = 0
-        myPort.open()
-    except:
-        print "Something went wrong. Cannon open port."
-    if myPort.isOpen() == True:
-        print myPort.name + " is open."
 
-if open != True:
-    try:
-        myPort.close()
-    except:
-        print "Something went wrong. Cannot close port."
-    if myPort.isOpen != True:
-        print "Port is closed"
+myPort = serial.Serial('COM6')
+# myPort.baudrate = 9600
+# myPort.open()
+# if open == True:
+#     try:
+#         myPort.baudrate = 9600
+#         myPort.port = "COM6"
+#         # myPort.timeout = 0
+#         myPort.open()
+#     except:
+#         print "Something went wrong. Cannon open port."
+#     if myPort.isOpen() == True:
+#         print myPort.name + " is open."
 
-myPort.flushInput()
-myPort.flushOutput()
+# if open != True:
+#     try:
+#         myPort.close()
+#     except:
+#         print "Something went wrong. Cannot close port."
+#     if myPort.isOpen != True:
+#         print "Port is closed"
+
+# myPort.flushInput()
+# myPort.flushOutput()
 
 ghSpeedsList = []
 board0speeds = []
@@ -48,14 +51,10 @@ board4targets = []
 speed_val = [0]*98
 angle_us1 = [0]*98
 
-speed = input("What speed?")
-angle = input("What angle?")
 
-speed_val = [speed]*98
-angle_us1 = [angle]*98
 
-print speed_val
-print angle_us1
+# print speed_val
+# print angle_us1
 
 class Controller:
     
@@ -89,8 +88,10 @@ class Controller:
         multi_target_cmd = [0x1F, num_targets, start_chan]
         cmd_intro = self.PololuCmd + multi_target_cmd
         cmd = cmd_intro + cmdSplitList
-        #print cmd
+        # print cmd
+        print "Moving servos"
         self.usb.write(bytes(bytearray(cmd)))
+        # myPort.write(bytes(bytearray(cmd)))
         # # Record Target value
         # self.Targets[chan] = target
         
@@ -117,9 +118,10 @@ class Controller:
             msb = (value >> 7) & 0x7f #shift 7 and take next 7 bits for msb
             set_speed_cmd = [0x07, chan, lsb, msb]
             cmd = self.PololuCmd + set_speed_cmd
-            print cmd
+            # print cmd
 
             self.usb.write(bytes(bytearray(cmd)))
+            # myPort.write(bytes(bytearray(cmd)))
         
 
     # Set acceleration of channel
@@ -139,14 +141,18 @@ class Controller:
         intro_cmd = self.PololuCmd
         moving = [0x13]
         cmd = intro_cmd + moving
-        print cmd
+        # print cmd
         self.usb.write(bytes(bytearray(cmd)))
+        # myPort.write(bytes(bytearray(cmd)))
         # workaround to make the speed and target assignment to run since the reads are not returning anything
-        return False
-        # if self.usb.read() == 0x00:
-        #     return False
-        # else:
-        #     return True
+        # return False
+        response = self.usb.read()
+        # response = myPort.read()
+        print (base64.b16encode(response) + "\n")
+        if response == chr(0):
+            return False
+        else:
+            return True
 
 # the parsing functions create the arrays of speeds and targets used for each board
 # both functions take a list of 98 values which is the number of servos used in the project
@@ -216,67 +222,95 @@ def parseTargets(*ghTargets):
             print "Invalid target index"
 
 def setBoards():
-    parseSpeeds(*speed_val)
-    parseTargets(*angle_us1)
+    pass
+    # parseSpeeds(*speed_val)
+    # parseTargets(*angle_us1)
+    # moving_state0 = board0.getMovingState()
+    # # moving_state1 = board1.getMovingState()
+    # # moving_state2 = board2.getMovingState()
+    # # moving_state3 = board3.getMovingState()
+    # # moving_state4 = board4.getMovingState()
 
-    if board0.getMovingState() is False:
-        board0.setSpeeds(*board0speeds)
-        board0.setTargets(0x14, 0x00,*board0targets)
-    elif board0.getMovingState() is True:
-        print "Board0 still has moving servos"
-    else:
-        print "Non conclusive"
+    # if moving_state0 is False:
+    #     board0.setSpeeds(*board0speeds)
+    #     board0.setTargets(0x14, 0x00,*board0targets)
+    # elif moving_state0 is True:
+    #     print "Board0 still has moving servos"
+    # else:
+    #     print "Non conclusive"
 
-    if board1.getMovingState() is False:
-        board1.setSpeeds(*board1speeds)
-        board1.setTargets(0x13, 0x00,*board1targets)
-    elif board1.getMovingState() is True:
-        print "Board1 still has moving servos"
-    else:
-        print "Non conclusive"
+    # if moving_state1 is False:
+    #     board1.setSpeeds(*board1speeds)
+    #     board1.setTargets(0x13, 0x00,*board1targets)
+    # elif moving_state1 is True:
+    #     print "Board1 still has moving servos"
+    # else:
+    #     print "Non conclusive"
 
-    if board2.getMovingState() is False:
-        board2.setSpeeds(*board2speeds)
-        board2.setTargets(0x14, 0x00,*board2targets)
-    elif board2.getMovingState() is True:
-        print "Board2 still has moving servos"
-    else:
-        print "Non conclusive"
+    # if moving_state2 is False:
+    #     board2.setSpeeds(*board2speeds)
+    #     board2.setTargets(0x14, 0x00,*board2targets)
+    # elif moving_state2 is True:
+    #     print "Board2 still has moving servos"
+    # else:
+    #     print "Non conclusive"
 
-    if board3.getMovingState() is False:
-        board3.setSpeeds(*board3speeds)
-        board3.setTargets(0x13, 0x00,*board3targets)
-    elif board3.getMovingState() is True:
-        print "Board3 still has moving servos"
-    else:
-        print "Non conclusive"
+    # if moving_state3 is False:
+    #     board3.setSpeeds(*board3speeds)
+    #     board3.setTargets(0x13, 0x00,*board3targets)
+    # elif moving_state3 is True:
+    #     print "Board3 still has moving servos"
+    # else:
+    #     print "Non conclusive"
 
-    if board4.getMovingState() is False:
-        board4.setSpeeds(*board4speeds)
-        board4.setTargets(0x14, 0x00,*board4targets)
-    elif board4.getMovingState() is True:
-        print "Board4 still has moving servos"
-    else:
-        print "Non conclusive"
+    # if moving_state4 is False:
+    #     board4.setSpeeds(*board4speeds)
+    #     board4.setTargets(0x14, 0x00,*board4targets)
+    # elif moving_state4 is True:
+    #     print "Board4 still has moving servos"
+    # else:
+    #     print "Non conclusive"
     
 
 
 board0 = Controller(0x00)
-board1 = Controller(0x01)
-board2 = Controller(0x02)
-board3 = Controller(0x03)
-board4 = Controller(0x04)
+# board1 = Controller(0x01)
+# board2 = Controller(0x02)
+# board3 = Controller(0x03)
+# board4 = Controller(0x04)
 
-setBoards()
-print myPort.read()
+go_again = input("Enter values?")
 
-end_sequence = input("Do you want to close port?")
-if end_sequence == True:
-    try:
-        myPort.close()
-    except: 
-        print "Something went wrong. Cannot close port."
-    if myPort.isOpen != True:
-        print "Port is closed."
+while go_again == "y":
+    speed = input("What speed?")
+    angle = input("What angle?")
+
+    speed_val = [speed]*98
+    angle_us1 = [angle]*98
+    parseSpeeds(*speed_val)
+    parseTargets(*angle_us1)
+
+    moving_state0 = board0.getMovingState()
+    # moving_state1 = board1.getMovingState()
+    # moving_state2 = board2.getMovingState()
+    # moving_state3 = board3.getMovingState()
+    # moving_state4 = board4.getMovingState()
+
+    if moving_state0 is False:
+        board0.setSpeeds(*board0speeds)
+        board0.setTargets(0x14, 0x00,*board0targets)
+    elif moving_state0 is True:
+        print "Board0 still has moving servos"
+    else:
+        print "Non conclusive"
+
+    #setBoards()
+
+    go_again = input("Do you want to go again?")
+
+print "Closing port"
+myPort.close()
+
+
 
 
