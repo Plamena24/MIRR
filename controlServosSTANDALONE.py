@@ -10,7 +10,7 @@ import serial
 import base64
 
 
-myPort = serial.Serial('COM6')
+myPort = serial.Serial('COM4')
 # myPort.baudrate = 9600
 # myPort.open()
 # if open == True:
@@ -235,59 +235,59 @@ def setBoards():
     pass
     # parseSpeeds(*speed_val)
     # parseTargets(*angle_us1)
-    # moving_state0 = board0.getMovingState()
-    # # moving_state1 = board1.getMovingState()
-    # # moving_state2 = board2.getMovingState()
-    # # moving_state3 = board3.getMovingState()
-    # # moving_state4 = board4.getMovingState()
+    moving_state0 = board0.getMovingState()
+    moving_state1 = board1.getMovingState()
+    moving_state2 = board2.getMovingState()
+    moving_state3 = board3.getMovingState()
+    moving_state4 = board4.getMovingState()
 
-    # if moving_state0 is False:
-    #     board0.setSpeeds(*board0speeds)
-    #     board0.setTargets(0x14, 0x00,*board0targets)
-    # elif moving_state0 is True:
-    #     print "Board0 still has moving servos"
-    # else:
-    #     print "Non conclusive"
+    if moving_state0 is False:
+        board0.setSpeeds(*board0speeds)
+        board0.setTargets(0x14, 0x00,*board0targets)
+    elif moving_state0 is True:
+        print "Board0 still has moving servos"
+    else:
+        print "Non conclusive"
 
-    # if moving_state1 is False:
-    #     board1.setSpeeds(*board1speeds)
-    #     board1.setTargets(0x13, 0x00,*board1targets)
-    # elif moving_state1 is True:
-    #     print "Board1 still has moving servos"
-    # else:
-    #     print "Non conclusive"
+    if moving_state1 is False:
+        board1.setSpeeds(*board1speeds)
+        board1.setTargets(0x13, 0x00,*board1targets)
+    elif moving_state1 is True:
+        print "Board1 still has moving servos"
+    else:
+        print "Non conclusive"
 
-    # if moving_state2 is False:
-    #     board2.setSpeeds(*board2speeds)
-    #     board2.setTargets(0x14, 0x00,*board2targets)
-    # elif moving_state2 is True:
-    #     print "Board2 still has moving servos"
-    # else:
-    #     print "Non conclusive"
+    if moving_state2 is False:
+        board2.setSpeeds(*board2speeds)
+        board2.setTargets(0x14, 0x00,*board2targets)
+    elif moving_state2 is True:
+        print "Board2 still has moving servos"
+    else:
+        print "Non conclusive"
 
-    # if moving_state3 is False:
-    #     board3.setSpeeds(*board3speeds)
-    #     board3.setTargets(0x13, 0x00,*board3targets)
-    # elif moving_state3 is True:
-    #     print "Board3 still has moving servos"
-    # else:
-    #     print "Non conclusive"
+    if moving_state3 is False:
+        board3.setSpeeds(*board3speeds)
+        board3.setTargets(0x13, 0x00,*board3targets)
+    elif moving_state3 is True:
+        print "Board3 still has moving servos"
+    else:
+        print "Non conclusive"
 
-    # if moving_state4 is False:
-    #     board4.setSpeeds(*board4speeds)
-    #     board4.setTargets(0x14, 0x00,*board4targets)
-    # elif moving_state4 is True:
-    #     print "Board4 still has moving servos"
-    # else:
-    #     print "Non conclusive"
+    if moving_state4 is False:
+        board4.setSpeeds(*board4speeds)
+        board4.setTargets(0x14, 0x00,*board4targets)
+    elif moving_state4 is True:
+        print "Board4 still has moving servos"
+    else:
+        print "Non conclusive"
     
 
 
 board0 = Controller(0x00)
-# board1 = Controller(0x01)
-# board2 = Controller(0x02)
-# board3 = Controller(0x03)
-# board4 = Controller(0x04)
+board1 = Controller(0x01)
+board2 = Controller(0x02)
+board3 = Controller(0x03)
+board4 = Controller(0x04)
 
 go_again = input("Enter values?")
 
@@ -300,21 +300,21 @@ while go_again == "y":
     parseSpeeds(*speed_val)
     parseTargets(*angle_us1)
 
-    moving_state0 = board0.getMovingState()
+    # moving_state0 = board0.getMovingState()
     # moving_state1 = board1.getMovingState()
     # moving_state2 = board2.getMovingState()
     # moving_state3 = board3.getMovingState()
     # moving_state4 = board4.getMovingState()
 
-    if moving_state0 is False:
-        board0.setSpeeds(*board0speeds)
-        board0.setTargets(0x14, 0x00,*board0targets)
-    elif moving_state0 is True:
-        print "Board0 still has moving servos"
-    else:
-        print "Non conclusive"
+    # if moving_state0 is False:
+    #     board0.setSpeeds(*board0speeds)
+    #     board0.setTargets(0x14, 0x00,*board0targets)
+    # elif moving_state0 is True:
+    #     print "Board0 still has moving servos"
+    # else:
+    #     print "Non conclusive"
 
-    #setBoards()
+    setBoards()
 
     go_again = input("Do you want to go again?")
 
