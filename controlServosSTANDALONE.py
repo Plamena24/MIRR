@@ -163,6 +163,11 @@ def parseSpeeds(*ghSpeeds):
 
     ghSpeedsList = list(ghSpeeds)
     #print ghSpeedsList
+    board0speeds = []
+    board1speeds = []
+    board2speeds = []
+    board3speeds = []
+    board4speeds = []
 
     for index, speed in enumerate(ghSpeedsList):
         if index < 20:
@@ -195,7 +200,12 @@ def parseTargets(*ghTargets):
 
     ghTargetsList = list(ghTargets)
     #print ghTargetsList
-
+    board0targets = []
+    board1targets = []
+    board2targets = []
+    board3targets = []
+    board4targets = []
+    
     for index, target in enumerate(ghTargetsList):
         if index < 20:
             parsedTargets[0] = 0x00
