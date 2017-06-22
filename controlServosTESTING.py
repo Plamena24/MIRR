@@ -245,6 +245,12 @@ def setBoards():
         print "There are servos still moving."
         
 def goHome():
+    speed_val = []
+    angle_us1 = []
+
+    speed_val = [6]*98
+    angle_us1= [1500]*98
+    
     parseSpeeds(*speed_val)
     parseTargets(*angle_us1)
 
@@ -260,22 +266,29 @@ def goHome():
     targets3 = board3.setTargets(0x13, 0x00,*board3targets)
     targets4 = board4.setTargets(0x14, 0x00,*board4targets)
 
-
-
     full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
                targets0 + targets1 + targets2 + targets3 + targets4
     # print full_cmd
     myPort.write(bytes(bytearray(full_cmd)))
     print "Homing"
 
-
-
 def power_off(off_value):
     while movingState() == True:
         print "Waiting to go home."
-        
-    print "Shutting servos off"
-    trigger = off_value * 4
+    else:   
+        print "Shutting servos off"
+        trigger = off_value * 4
+        lsb = trigger & 0x7f #7 bits for least significant byte
+        msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
+        switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
+        switch2 = [0xAA, 0x03, 0x04, 0x17, lsb, msb]
+        off_cmd = switch1 + switch2
+        print off_cmd
+        myPort.write(bytes(bytearray(off_cmd)))
+
+def power_on(on_value):
+    print "Power on"
+    trigger = on_value * 4
     lsb = trigger & 0x7f #7 bits for least significant byte
     msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
     switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
@@ -292,15 +305,9 @@ board3 = Controller(0x03)
 board4 = Controller(0x04)
 
 if boards_off == 1:
-    speed_val = []
-    angle_us1 = []
-
-    speed_val = [6]*98
-    angle_us1= [1500]*98
-
     goHome()
     power_off(2000)
 else:
-    power_off(1000)
-    goHome()
+    power_on(1000)
+    #goHome()
     setBoards()
