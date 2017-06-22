@@ -271,6 +271,9 @@ def goHome():
 
 
 def power_off(off_value):
+    while movingState() == True:
+        print "Waiting to go home."
+        
     print "Shutting servos off"
     trigger = off_value * 4
     lsb = trigger & 0x7f #7 bits for least significant byte
