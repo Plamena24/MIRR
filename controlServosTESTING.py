@@ -202,6 +202,22 @@ def parseTargets(*ghTargets):
         else:
             print "Invalid target index."
 
+def movingState():
+    moving_state0 = board0.getMovingState()
+    moving_state1 = board1.getMovingState()
+    moving_state2 = board2.getMovingState()
+    moving_state3 = board3.getMovingState()
+    moving_state4 = board4.getMovingState()
+
+    if moving_state0 is False and \
+       moving_state1 is False and \
+       moving_state2 is False and \
+       moving_state3 is False and \
+       moving_state4 is False:
+        return False
+    else:
+        return True
+
 
 def setBoards():
     parseSpeeds(*speed_val)
@@ -219,17 +235,7 @@ def setBoards():
     targets3 = board3.setTargets(0x13, 0x00,*board3targets)
     targets4 = board4.setTargets(0x14, 0x00,*board4targets)
 
-    moving_state0 = board0.getMovingState()
-    moving_state1 = board1.getMovingState()
-    moving_state2 = board2.getMovingState()
-    moving_state3 = board3.getMovingState()
-    moving_state4 = board4.getMovingState()
-
-    if moving_state0 is False and \
-       moving_state1 is False and \
-       moving_state2 is False and \
-       moving_state3 is False and \
-       moving_state4 is False:
+    if movingState() == False:
         full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
                    targets0 + targets1 + targets2 + targets3 + targets4
         # print full_cmd
@@ -237,20 +243,44 @@ def setBoards():
         print "Moving servos"
     else:
         print "There are servos still moving."
+        
+def goHome():
+    parseSpeeds(*speed_val)
+    parseTargets(*angle_us1)
+
+    speeds0 = board0.setSpeeds(*board0speeds)
+    speeds1 = board1.setSpeeds(*board1speeds)
+    speeds2 = board2.setSpeeds(*board2speeds)
+    speeds3 = board3.setSpeeds(*board3speeds)
+    speeds4 = board4.setSpeeds(*board4speeds)
+          
+    targets0 = board0.setTargets(0x14, 0x00,*board0targets)
+    targets1 = board1.setTargets(0x13, 0x00,*board1targets)
+    targets2 = board2.setTargets(0x14, 0x00,*board2targets) 
+    targets3 = board3.setTargets(0x13, 0x00,*board3targets)
+    targets4 = board4.setTargets(0x14, 0x00,*board4targets)
+
+
+
+    full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+               targets0 + targets1 + targets2 + targets3 + targets4
+    # print full_cmd
+    myPort.write(bytes(bytearray(full_cmd)))
+    print "Homing"
+
+
 
 def power_off(off_value):
-    if moving_state0 is False and \
-       moving_state1 is False and \
-       moving_state2 is False and \
-       moving_state3 is False and \
-       moving_state4 is False:
-        trigger = off_value * 4
-        lsb = trigger & 0x7f #7 bits for least significant byte
-        msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
-        switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
-        switch2 = [0xAA, 0x03, 0x04, 0x17, lsb, msb]
-        off_cmd = switch1 + switch2
-        myPort.write(bytes(bytearray(off_cmd)))
+    print "Shutting servos off"
+    trigger = off_value * 4
+    lsb = trigger & 0x7f #7 bits for least significant byte
+    msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
+    switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
+    switch2 = [0xAA, 0x03, 0x04, 0x17, lsb, msb]
+    off_cmd = switch1 + switch2
+    print off_cmd
+    myPort.write(bytes(bytearray(off_cmd)))
+
 
 board0 = Controller(0x00)
 board1 = Controller(0x01)
@@ -265,15 +295,9 @@ if boards_off == 1:
     speed_val = [6]*98
     angle_us1= [1500]*98
 
-    setBoards()
-    power_off(1000)
+    goHome()
+    power_off(2000)
 else:
+    power_off(1000)
+    goHome()
     setBoards()
-
-
-
-
-
-
-
-
