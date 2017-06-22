@@ -6,13 +6,13 @@ myPort = scriptcontext.sticky['serialport']
 myPort.flushInput()
 myPort.flushOutput()
 
-
 ghSpeedsList = []
 board0speeds = []
 board1speeds = []
 board2speeds = []
 board3speeds = []
 board4speeds = []
+
 ghTargetsList = []
 board0targets = []
 board1targets = []
@@ -237,8 +237,20 @@ def setBoards():
         print "Moving servos"
     else:
         print "There are servos still moving."
-    
 
+def power_off(off_value):
+    if moving_state0 is False and \
+       moving_state1 is False and \
+       moving_state2 is False and \
+       moving_state3 is False and \
+       moving_state4 is False:
+        trigger = off_value * 4
+        lsb = trigger & 0x7f #7 bits for least significant byte
+        msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
+        switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
+        switch2 = [0xAA, 0x03, 0x04, 0x17, lsb, msb]
+        off_cmd = switch1 + switch2
+        myPort.write(bytes(bytearray(off_cmd)))
 
 board0 = Controller(0x00)
 board1 = Controller(0x01)
@@ -246,7 +258,19 @@ board2 = Controller(0x02)
 board3 = Controller(0x03)
 board4 = Controller(0x04)
 
-setBoards()
+if boards_off == 1:
+    speed_val = []
+    angle_us1 = []
+
+    speed_val = [6]*98
+    angle_us1= [1500]*98
+
+    setBoards()
+    power_off(1000)
+else:
+    setBoards()
+
+
 
 
 
