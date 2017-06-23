@@ -55,7 +55,7 @@ class Controller:
         multi_target_cmd = [0x1F, num_targets, start_chan]
         cmd_intro = self.PololuCmd + multi_target_cmd
         cmd = cmd_intro + cmdSplitList
-        # print cmd
+        #print cmd
         return cmd
         # self.usb.write(bytes(bytearray(cmd)))
         # myPort.write(bytes(bytearray(cmd)))
@@ -235,14 +235,19 @@ def setBoards():
     targets3 = board3.setTargets(0x13, 0x00,*board3targets)
     targets4 = board4.setTargets(0x14, 0x00,*board4targets)
 
-    if movingState() == False:
-        full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
-                   targets0 + targets1 + targets2 + targets3 + targets4
-        # print full_cmd
-        myPort.write(bytes(bytearray(full_cmd)))
-        print "Moving servos"
-    else:
-        print "There are servos still moving."
+    # if movingState() == False:
+    #     full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+    #                targets0 + targets1 + targets2 + targets3 + targets4
+    #     # print full_cmd
+    #     myPort.write(bytes(bytearray(full_cmd)))
+    #     print "Moving servos"
+    # else:
+    #     print "There are servos still moving."
+    full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+               targets0 + targets1 + targets2 + targets3 + targets4
+    myPort.write(bytes(bytearray(full_cmd)))
+    print full_cmd
+    print "Moving servos"
         
 def goHome():
     speed_val = []
@@ -293,9 +298,9 @@ def power_on(on_value):
     msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
     switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
     switch2 = [0xAA, 0x03, 0x04, 0x17, lsb, msb]
-    off_cmd = switch1 + switch2
-    print off_cmd
-    myPort.write(bytes(bytearray(off_cmd)))
+    on_cmd = switch1 + switch2
+    print on_cmd
+    myPort.write(bytes(bytearray(on_cmd)))
 
 
 board0 = Controller(0x00)
@@ -311,4 +316,5 @@ else:
     power_on(1000)
     #goHome()
     setBoards()
+    
     
