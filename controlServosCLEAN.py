@@ -35,7 +35,7 @@ class Controller:
 
         valueList = list(targets)
         cmdSplitList = []
-        print valueList
+        # print valueList
 
         qValueList = [us*4 for us in valueList]
         #print qValueList
@@ -142,46 +142,46 @@ def parseTargets(*ghTargets):
     global ghTargetsList, board0targets, board1targets, board2targets, board3targets, board4targets
 
     ghTargetsList = list(ghTargets)
-    print ghTargetsList
+    # print ghTargetsList
     board0targets = []
     board1targets = []
     board2targets = []
     board3targets = []
     board4targets = []
-    print board0targets
-    print board1targets
-    print board2targets
-    print board3targets
-    print board4targets
+    # print board0targets
+    # print board1targets
+    # print board2targets
+    # print board3targets
+    # print board4targets
     
     for index, target in enumerate(ghTargetsList):
         if index < 20:
-            print index, target
+            # print index, target
             board0targets.append(target)
-            print board0targets
+            # print board0targets
         elif index > 19 and index < 39:
-            print index, target
+            # print index, target
             board1targets.append(target)
-            print board1targets
+            # print board1targets
         elif index > 38 and index < 59:
-            print index, target
+            # print index, target
             board2targets.append(target)
-            print board2targets
+            # print board2targets
         elif index > 58 and index < 78:
-            print index, target
+            # print index, target
             board3targets.append(target)
-            print board3targets
+            # print board3targets
         elif index > 77 and index < 98:
-            print index, target
+            # print index, target
             board4targets.append(target)
-            print board4targets
+            # print board4targets
         else:
             print "Invalid target index."
-    print board0targets
-    print board1targets
-    print board2targets
-    print board3targets
-    print board4targets
+    # print board0targets
+    # print board1targets
+    # print board2targets
+    # print board3targets
+    # print board4targets
 
 def movingState():
     moving_state0 = board0.getMovingState()
@@ -227,7 +227,7 @@ def setBoards():
     full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
                targets0 + targets1 + targets2 + targets3 + targets4
     myPort.write(bytes(bytearray(full_cmd)))
-    print full_cmd
+    # print full_cmd
     print "Moving servos"
         
 def goHome():
