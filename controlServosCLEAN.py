@@ -283,6 +283,66 @@ def power_on(on_value):
     print on_cmd
     myPort.write(bytes(bytearray(on_cmd)))
 
+def testMode():
+    print "Testing individual channels"
+    
+
+    speed_val = []
+    angle_us1 = []
+
+    speed_val = [2]*98
+    angle_us1= [1300]*98
+    
+    parseSpeeds(*speed_val)
+    parseTargets(*angle_us1)
+
+    speeds0 = board0.setSpeeds(*board0speeds)
+    speeds1 = board1.setSpeeds(*board1speeds)
+    speeds2 = board2.setSpeeds(*board2speeds)
+    speeds3 = board3.setSpeeds(*board3speeds)
+    speeds4 = board4.setSpeeds(*board4speeds)
+          
+    targets0 = board0.setTargets(0x14, 0x00,*board0targets)
+    targets1 = board1.setTargets(0x13, 0x00,*board1targets)
+    targets2 = board2.setTargets(0x14, 0x00,*board2targets) 
+    targets3 = board3.setTargets(0x13, 0x00,*board3targets)
+    targets4 = board4.setTargets(0x14, 0x00,*board4targets)
+
+    full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+               targets0 + targets1 + targets2 + targets3 + targets4
+    # print full_cmd
+    myPort.write(bytes(bytearray(full_cmd)))
+    
+    while movingState() == True:
+        print "Testing left."
+    else: 
+        print "Testing right."
+        speed_val = []
+        angle_us1 = []
+
+        speed_val = [2]*98
+        angle_us1= [1700]*98
+        
+        parseSpeeds(*speed_val)
+        parseTargets(*angle_us1)
+
+        speeds0 = board0.setSpeeds(*board0speeds)
+        speeds1 = board1.setSpeeds(*board1speeds)
+        speeds2 = board2.setSpeeds(*board2speeds)
+        speeds3 = board3.setSpeeds(*board3speeds)
+        speeds4 = board4.setSpeeds(*board4speeds)
+              
+        targets0 = board0.setTargets(0x14, 0x00,*board0targets)
+        targets1 = board1.setTargets(0x13, 0x00,*board1targets)
+        targets2 = board2.setTargets(0x14, 0x00,*board2targets) 
+        targets3 = board3.setTargets(0x13, 0x00,*board3targets)
+        targets4 = board4.setTargets(0x14, 0x00,*board4targets)
+
+        full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+                   targets0 + targets1 + targets2 + targets3 + targets4
+        # print full_cmd
+        myPort.write(bytes(bytearray(full_cmd)))
+            
 
 board0 = Controller(0x00)
 board1 = Controller(0x01)
@@ -293,6 +353,9 @@ board4 = Controller(0x04)
 if boards_off == 1:
     goHome()
     power_off(2000)
+elif test_mode == True:
+    goHome()
+    testMode()
 else:
     power_on(1000)
     #goHome()
