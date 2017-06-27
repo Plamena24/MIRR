@@ -139,7 +139,7 @@ def parseSpeeds(*ghSpeeds):
     board2speeds = []
     board3speeds = []
     board4speeds = []
-
+    
     for index, speed in enumerate(ghSpeedsList):
         if index < 20:
             parsedSpeeds[0] = 0x00
@@ -170,37 +170,61 @@ def parseTargets(*ghTargets):
     parsedTargets = [0]*2
 
     ghTargetsList = list(ghTargets)
-    #print ghTargetsList
+    print ghTargetsList
     board0targets = []
     board1targets = []
     board2targets = []
     board3targets = []
     board4targets = []
+    print board0targets
+    print board1targets
+    print board2targets
+    print board3targets
+    print board4targets
     
     for index, target in enumerate(ghTargetsList):
         if index < 20:
-            parsedTargets[0] = 0x00
-            parsedTargets[1] = target
-            board0targets.append(parsedTargets)
-            #print board0targets
+            print index, target
+#            parsedTargets[0] = 0x00
+#            parsedTargets[1] = target
+#            print parsedTargets
+            board0targets.append(target)
+            print board0targets
         elif index > 19 and index < 39:
+            print index, target
             parsedTargets[0] = 0x01
             parsedTargets[1] = target
+            print parsedTargets
             board1targets.append(parsedTargets)
+            print board1targets
         elif index > 38 and index < 59:
+            print index, target
             parsedTargets[0] = 0x02
             parsedTargets[1] = target
+            print parsedTargets
             board2targets.append(parsedTargets)
+            print board2targets
         elif index > 58 and index < 78:
+            print index, target
             parsedTargets[0] = 0x03
             parsedTargets[1] = target
+            print parsedTargets
             board3targets.append(parsedTargets)
+            print board3targets
         elif index > 77 and index < 98:
+            print index, target
             parsedTargets[0] = 0x04
             parsedTargets[1] = target
+            print parsedTargets
             board4targets.append(parsedTargets)
+            print board4targets
         else:
             print "Invalid target index."
+    print board0targets
+    print board1targets
+    print board2targets
+    print board3targets
+    print board4targets
 
 def movingState():
     moving_state0 = board0.getMovingState()
@@ -222,7 +246,7 @@ def movingState():
 def setBoards():
     parseSpeeds(*speed_val)
     parseTargets(*angle_us1)
-
+    
     speeds0 = board0.setSpeeds(*board0speeds)
     speeds1 = board1.setSpeeds(*board1speeds)
     speeds2 = board2.setSpeeds(*board2speeds)
@@ -316,5 +340,6 @@ else:
     power_on(1000)
     #goHome()
     setBoards()
+    
     
     
