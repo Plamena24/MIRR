@@ -33,13 +33,9 @@ class Controller:
      
     def setTargets(self, num_targets, start_chan = 0x00, *targets):
 
-        pairList = list(targets)
-        valueList = []
+        valueList = list(targets)
         cmdSplitList = []
-
-        for pair in pairList:
-            valueList.append(pair[1])
-        #print valueList
+        print valueList
 
         qValueList = [us*4 for us in valueList]
         #print qValueList
@@ -55,7 +51,7 @@ class Controller:
         multi_target_cmd = [0x1F, num_targets, start_chan]
         cmd_intro = self.PololuCmd + multi_target_cmd
         cmd = cmd_intro + cmdSplitList
-        # print cmd
+        #print cmd
         return cmd
         # self.usb.write(bytes(bytearray(cmd)))
         # myPort.write(bytes(bytearray(cmd)))
@@ -69,13 +65,9 @@ class Controller:
     # Speed of 0 is unrestricted.
     def setSpeeds(self, *speeds):
         
-        pairList = list(speeds)
-        valueList = []
+        valueList = list(speeds)
         cmdSplitList = []
         speed_cmd = []
-
-        for pair in pairList:
-            valueList.append(pair[1])
         #print valueList
 
         qValueList = [us*4 for us in valueList]
@@ -90,11 +82,7 @@ class Controller:
         # print speed_cmd
         return speed_cmd
             # print cmd
-
-            # self.usb.write(bytes(bytearray(cmd)))
-            # myPort.write(bytes(bytearray(cmd)))
         
-
     # Set acceleration of channel
     # This provide soft starts and finishes when servo moves to target position.
     # Valid values are from 0 to 255. 0=unrestricted, 1 is slowest start.
@@ -114,9 +102,6 @@ class Controller:
         cmd = intro_cmd + moving
         # print cmd
         self.usb.write(bytes(bytearray(cmd)))
-        # myPort.write(bytes(bytearray(cmd)))
-        # workaround to make the speed and target assignment to run since the reads are not returning anything
-        # return False
         response = self.usb.read()
         # response = myPort.read()
         print (base64.b16encode(response) + "\n")
@@ -130,7 +115,6 @@ class Controller:
 # in the full version of the program the lists are generated dynamically - target values for the 98 servos will generally be all different, speeds may or may not be different
 def parseSpeeds(*ghSpeeds):
     global ghSpeedsList, board0speeds, board1speeds, board2speeds, board3speeds, board4speeds
-    parsedSpeeds = [0]*2
 
     ghSpeedsList = list(ghSpeeds)
     #print ghSpeedsList
@@ -139,68 +123,65 @@ def parseSpeeds(*ghSpeeds):
     board2speeds = []
     board3speeds = []
     board4speeds = []
-
+    
     for index, speed in enumerate(ghSpeedsList):
         if index < 20:
-            parsedSpeeds[0] = 0x00
-            parsedSpeeds[1] = speed
-            board0speeds.append(parsedSpeeds)
-            #print board0speeds
+            board0speeds.append(speed)
         elif index > 19 and index < 39:
-            parsedSpeeds[0] = 0x01
-            parsedSpeeds[1] = speed
-            board1speeds.append(parsedSpeeds)
+            board1speeds.append(speed)
         elif index > 38 and index < 59:
-            parsedSpeeds[0] = 0x02
-            parsedSpeeds[1] = speed
-            board2speeds.append(parsedSpeeds)
+            board2speeds.append(speed)
         elif index > 58 and index < 78:
-            parsedSpeeds[0] = 0x03
-            parsedSpeeds[1] = speed
-            board3speeds.append(parsedSpeeds)
+            board3speeds.append(speed)
         elif index > 77 and index < 98:
-            parsedSpeeds[0] = 0x04
-            parsedSpeeds[1] = speed
-            board4speeds.append(parsedSpeeds)
+            board4speeds.append(speed)
         else:
             print "Invalid speed index."
 
 def parseTargets(*ghTargets):
     global ghTargetsList, board0targets, board1targets, board2targets, board3targets, board4targets
-    parsedTargets = [0]*2
 
     ghTargetsList = list(ghTargets)
-    #print ghTargetsList
+    print ghTargetsList
     board0targets = []
     board1targets = []
     board2targets = []
     board3targets = []
     board4targets = []
+    print board0targets
+    print board1targets
+    print board2targets
+    print board3targets
+    print board4targets
     
     for index, target in enumerate(ghTargetsList):
         if index < 20:
-            parsedTargets[0] = 0x00
-            parsedTargets[1] = target
-            board0targets.append(parsedTargets)
-            #print board0targets
+            print index, target
+            board0targets.append(target)
+            print board0targets
         elif index > 19 and index < 39:
-            parsedTargets[0] = 0x01
-            parsedTargets[1] = target
-            board1targets.append(parsedTargets)
+            print index, target
+            board1targets.append(target)
+            print board1targets
         elif index > 38 and index < 59:
-            parsedTargets[0] = 0x02
-            parsedTargets[1] = target
-            board2targets.append(parsedTargets)
+            print index, target
+            board2targets.append(target)
+            print board2targets
         elif index > 58 and index < 78:
-            parsedTargets[0] = 0x03
-            parsedTargets[1] = target
-            board3targets.append(parsedTargets)
+            print index, target
+            board3targets.append(target)
+            print board3targets
         elif index > 77 and index < 98:
-            parsedTargets[0] = 0x04
-            parsedTargets[1] = target
-            board4targets.append(parsedTargets)
+            print index, target
+            board4targets.append(target)
+            print board4targets
         else:
             print "Invalid target index."
+    print board0targets
+    print board1targets
+    print board2targets
+    print board3targets
+    print board4targets
 
 def movingState():
     moving_state0 = board0.getMovingState()
@@ -222,7 +203,7 @@ def movingState():
 def setBoards():
     parseSpeeds(*speed_val)
     parseTargets(*angle_us1)
-
+    
     speeds0 = board0.setSpeeds(*board0speeds)
     speeds1 = board1.setSpeeds(*board1speeds)
     speeds2 = board2.setSpeeds(*board2speeds)
@@ -235,14 +216,19 @@ def setBoards():
     targets3 = board3.setTargets(0x13, 0x00,*board3targets)
     targets4 = board4.setTargets(0x14, 0x00,*board4targets)
 
-    if movingState() == False:
-        full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
-                   targets0 + targets1 + targets2 + targets3 + targets4
-        # print full_cmd
-        myPort.write(bytes(bytearray(full_cmd)))
-        print "Moving servos"
-    else:
-        print "There are servos still moving."
+    # if movingState() == False:
+    #     full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+    #                targets0 + targets1 + targets2 + targets3 + targets4
+    #     # print full_cmd
+    #     myPort.write(bytes(bytearray(full_cmd)))
+    #     print "Moving servos"
+    # else:
+    #     print "There are servos still moving."
+    full_cmd = speeds0 + speeds1 + speeds2 + speeds3 + speeds4 + \
+               targets0 + targets1 + targets2 + targets3 + targets4
+    myPort.write(bytes(bytearray(full_cmd)))
+    print full_cmd
+    print "Moving servos"
         
 def goHome():
     speed_val = []
@@ -293,9 +279,9 @@ def power_on(on_value):
     msb = (trigger >> 7) & 0x7f #shift 7 and take next 7 bits for msb
     switch1 = [0xAA, 0x01, 0x04, 0x17, lsb, msb]
     switch2 = [0xAA, 0x03, 0x04, 0x17, lsb, msb]
-    off_cmd = switch1 + switch2
-    print off_cmd
-    myPort.write(bytes(bytearray(off_cmd)))
+    on_cmd = switch1 + switch2
+    print on_cmd
+    myPort.write(bytes(bytearray(on_cmd)))
 
 
 board0 = Controller(0x00)
@@ -311,4 +297,6 @@ else:
     power_on(1000)
     #goHome()
     setBoards()
+    
+    
     
