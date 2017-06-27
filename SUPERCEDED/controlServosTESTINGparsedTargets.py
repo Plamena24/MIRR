@@ -33,9 +33,13 @@ class Controller:
      
     def setTargets(self, num_targets, start_chan = 0x00, *targets):
 
-        valueList = list(targets)
+        pairList = list(targets)
+        valueList = []
         cmdSplitList = []
-        print valueList
+
+        for pair in pairList:
+            valueList.append(pair[1])
+        #print valueList
 
         qValueList = [us*4 for us in valueList]
         #print qValueList
@@ -65,9 +69,13 @@ class Controller:
     # Speed of 0 is unrestricted.
     def setSpeeds(self, *speeds):
         
-        valueList = list(speeds)
+        pairList = list(speeds)
+        valueList = []
         cmdSplitList = []
         speed_cmd = []
+
+        for pair in pairList:
+            valueList.append(pair[1])
         #print valueList
 
         qValueList = [us*4 for us in valueList]
@@ -82,7 +90,11 @@ class Controller:
         # print speed_cmd
         return speed_cmd
             # print cmd
+
+            # self.usb.write(bytes(bytearray(cmd)))
+            # myPort.write(bytes(bytearray(cmd)))
         
+
     # Set acceleration of channel
     # This provide soft starts and finishes when servo moves to target position.
     # Valid values are from 0 to 255. 0=unrestricted, 1 is slowest start.
@@ -102,6 +114,9 @@ class Controller:
         cmd = intro_cmd + moving
         # print cmd
         self.usb.write(bytes(bytearray(cmd)))
+        # myPort.write(bytes(bytearray(cmd)))
+        # workaround to make the speed and target assignment to run since the reads are not returning anything
+        # return False
         response = self.usb.read()
         # response = myPort.read()
         print (base64.b16encode(response) + "\n")
@@ -115,6 +130,7 @@ class Controller:
 # in the full version of the program the lists are generated dynamically - target values for the 98 servos will generally be all different, speeds may or may not be different
 def parseSpeeds(*ghSpeeds):
     global ghSpeedsList, board0speeds, board1speeds, board2speeds, board3speeds, board4speeds
+    parsedSpeeds = [0]*2
 
     ghSpeedsList = list(ghSpeeds)
     #print ghSpeedsList
@@ -126,20 +142,32 @@ def parseSpeeds(*ghSpeeds):
     
     for index, speed in enumerate(ghSpeedsList):
         if index < 20:
-            board0speeds.append(speed)
+            parsedSpeeds[0] = 0x00
+            parsedSpeeds[1] = speed
+            board0speeds.append(parsedSpeeds)
+            #print board0speeds
         elif index > 19 and index < 39:
-            board1speeds.append(speed)
+            parsedSpeeds[0] = 0x01
+            parsedSpeeds[1] = speed
+            board1speeds.append(parsedSpeeds)
         elif index > 38 and index < 59:
-            board2speeds.append(speed)
+            parsedSpeeds[0] = 0x02
+            parsedSpeeds[1] = speed
+            board2speeds.append(parsedSpeeds)
         elif index > 58 and index < 78:
-            board3speeds.append(speed)
+            parsedSpeeds[0] = 0x03
+            parsedSpeeds[1] = speed
+            board3speeds.append(parsedSpeeds)
         elif index > 77 and index < 98:
-            board4speeds.append(speed)
+            parsedSpeeds[0] = 0x04
+            parsedSpeeds[1] = speed
+            board4speeds.append(parsedSpeeds)
         else:
             print "Invalid speed index."
 
 def parseTargets(*ghTargets):
     global ghTargetsList, board0targets, board1targets, board2targets, board3targets, board4targets
+    parsedTargets = [0]*2
 
     ghTargetsList = list(ghTargets)
     print ghTargetsList
@@ -157,23 +185,38 @@ def parseTargets(*ghTargets):
     for index, target in enumerate(ghTargetsList):
         if index < 20:
             print index, target
+            parsedTargets[0] = 0x00
+            parsedTargets[1] = target
+            print parsedTargets
             board0targets.append(target)
             print board0targets
         elif index > 19 and index < 39:
             print index, target
-            board1targets.append(target)
+            parsedTargets[0] = 0x01
+            parsedTargets[1] = target
+            print parsedTargets
+            board1targets.append(parsedTargets)
             print board1targets
         elif index > 38 and index < 59:
             print index, target
-            board2targets.append(target)
+            parsedTargets[0] = 0x02
+            parsedTargets[1] = target
+            print parsedTargets
+            board2targets.append(parsedTargets)
             print board2targets
         elif index > 58 and index < 78:
             print index, target
-            board3targets.append(target)
+            parsedTargets[0] = 0x03
+            parsedTargets[1] = target
+            print parsedTargets
+            board3targets.append(parsedTargets)
             print board3targets
         elif index > 77 and index < 98:
             print index, target
-            board4targets.append(target)
+            parsedTargets[0] = 0x04
+            parsedTargets[1] = target
+            print parsedTargets
+            board4targets.append(parsedTargets)
             print board4targets
         else:
             print "Invalid target index."
