@@ -235,7 +235,7 @@ def goHome():
     angle_us1 = []
 
     speed_val = [6]*98
-    angle_us1= home_angles
+    angle_us1= [1500]*98
     
     parseSpeeds(*speed_val)
     parseTargets(*angle_us1)
@@ -360,6 +360,9 @@ else:
     power_on(1000)
     #goHome()
     setBoards()
+    
+    
+    
     
     
     
