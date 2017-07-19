@@ -35,7 +35,7 @@ unsigned long lightTimers_ms[98] = {};
 unsigned long next_tx_ms = 0;
 unsigned long next_rx_ms = 0;
 int tx_interval_ms = 100;
-int rx_interval_ms = 90;
+int rx_interval_ms = 10;
 int lightChange_interval_ms = 5000;
 
 
@@ -115,15 +115,16 @@ void readButtons(){
   //mcp stuff goes in here
   for (int i = 0; i < 98; i++){
     pinInfo info = buttonMapping[i];
-    buttonsPressed[i] = buttonsPressed[i] || MCPArray[info.chipId].digitalRead(info.pinNumber); 
-    // Serial.print(i);
-    // Serial.print(",");
-    // Serial.print(MCPArray[info.chipId].digitalRead(info.pinNumber));
-    // Serial.print(",");
-    // Serial.print((int)info.chipId);
-    // Serial.print(",");
-    // Serial.print((int)info.pinNumber);
-    // Serial.println();
+    int reading = MCPArray[info.chipId].digitalRead(info.pinNumber);
+    buttonsPressed[i] = buttonsPressed[i] || reading;
+//    Serial.print(i);
+//    Serial.print(",");
+//    Serial.print(reading);
+//    Serial.print(",");
+//    Serial.print((int)info.chipId);
+//    Serial.print(",");
+//    Serial.print((int)info.pinNumber);
+//    Serial.println();
     
   }
  // digitalWrite(LED_BUILTIN, MCPArray[buttonMapping.chipId].digitalRead(buttonMapping.pinNumber));
@@ -247,9 +248,6 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
 
   strip.begin();
-  for (int i=0; i<strip.numPixels(); i++){
-    strip.setPixelColor(i, Wheel((i*2) & 255));
-  }
   strip.show(); // Initialize all pixels to 'off'
 
   populateButtonMapping();
@@ -273,14 +271,9 @@ void setup() {
 
 void loop() {
   //return;  //debug
-  if (WiFi.status() != WL_CONNECTED) {
-    connectWiFi();
-    startMDNS();
-  }
   if (next_rx_ms <= millis()) {
     next_rx_ms = next_rx_ms + rx_interval_ms; // Time to RX a status message
     readButtons();
-    ESP.wdtFeed();
     populateLightTimers();
     setLightColor();
   }
@@ -288,9 +281,7 @@ void loop() {
     next_tx_ms = next_tx_ms + tx_interval_ms; // Time to TX a status message
     makeMessageBuffer();
     sendButtonState();
-    ESP.wdtFeed();
     clearButtons();
   }
- 
   delay(1);
 }

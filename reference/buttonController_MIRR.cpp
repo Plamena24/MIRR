@@ -34,8 +34,8 @@ unsigned long lightTimers_ms[98] = {};
 
 unsigned long next_tx_ms = 0;
 unsigned long next_rx_ms = 0;
-int tx_interval_ms = 10;
-int rx_interval_ms = 10;
+int tx_interval_ms = 100;
+int rx_interval_ms = 90;
 int lightChange_interval_ms = 5000;
 
 

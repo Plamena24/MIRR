@@ -1,0 +1,140 @@
+ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+..
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 0005c3f3 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff157c 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 00151765 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 001e8769 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
