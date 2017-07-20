@@ -1,0 +1,725 @@
+ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+..
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 0005c3f3 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff157c 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 00151765 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 001e8769 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+All 3 above DECODED:
+0x40203980: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x402055dd: Adafruit_NeoPixel::show() at /Users/plamena/Documents/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.cpp line 1971
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027d1: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff157c 40203980  
+3ffefc30:  00000043 d81f8dad 3ffeeaf8 00000000  
+3ffefc40:  4021d92e 3ffeec6c 00000000 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 4020152f  
+3ffefc70:  00000000 02547a9c 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...............................................................................
+
+DECODED
+
+0x40203980: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027d1: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x4020152f: delay at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_wiring.c line 50
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+
+Exception (29):
+epc1=0x4000e1c3 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000018 depc=0x00000000
+
+ctx: sys 
+sp: 3ffffc80 end: 3fffffb0 offset: 01a0
+
+>>>stack>>>
+3ffffe20:  4010235d 3ffec8c0 3ffed000 00000000  
+3ffffe30:  40210d2d 40210c6a 3fff096c 401024ec  
+3ffffe40:  00000018 3ffed338 3ffed2b4 00000000  
+3ffffe50:  40210dc8 3ff20a00 3fff096c 3ffeaa42  
+3ffffe60:  3ffeaa28 3ffe9724 3ffe9724 3ffeaa28  
+3ffffe70:  3ffeaa42 0000002c 3ffeaa51 401004f4  
+3ffffe80:  3ffeaa32 3fff0de4 4020db13 3ff20a00  
+3ffffe90:  3fff096c 3fff1074 00000015 4020d9e5  
+3ffffea0:  3ffe973c 80323da4 3ffeda08 00000000  
+3ffffeb0:  40000f68 00000030 0000001a ffffffff  
+3ffffec0:  40000f58 00000000 00000020 00000000  
+3ffffed0:  00000011 40226b80 00003a98 00000000  
+3ffffee0:  3ffee058 3ffe8cb4 3ffee058 3fffdab0  
+3ffffef0:  00000000 3fffdcb0 3ffee0a8 00000030  
+3fffff00:  40211c0d 00000000 00000015 00008000  
+3fffff10:  40214f8d ffffffb5 00000000 00008000  
+3fffff20:  4020d27d 3ffeaa28 3ffec8c0 3fff096c  
+3fffff30:  00000000 3ffeaa32 00000000 40213e38  
+3fffff40:  402086c8 00000000 3ffeaa32 3ffeaa28  
+3fffff50:  0000002d 3ffe8cb4 3fff0de4 3ffeaa1c  
+3fffff60:  00000000 00000015 402082fa 3ffec8c0  
+3fffff70:  3ffeaa1c 3fffdcc0 3ffe8fa8 3fff0c14  
+3fffff80:  3ffeaa38 00000040 00000000 3fffdcb0  
+3fffff90:  40207c3f 3fffdab0 00000000 4021fa96  
+3fffffa0:  3ffe8fa8 40000f49 3fffdab0 40000f49  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+......................................
+
+DECODED:
+0x4010235d: trc_NeedRTS at ?? line ?
+0x40210d2d: ieee80211_alloc_proberesp at ?? line ?
+0x40210c6a: ieee80211_alloc_proberesp at ?? line ?
+0x401024ec: trc_NeedRTS at ?? line ?
+0x40210dc8: ieee80211_send_proberesp at ?? line ?
+0x401004f4: calloc at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/umm_malloc/umm_malloc.c line 1684
+0x4020db13: hostap_input at ?? line ?
+0x4020d9e5: hostap_input at ?? line ?
+0x40226b80: sys_check_timeouts at /Users/igrokhotkov/espressif/arduino/tools/sdk/lwip/src/core/timers.c line 384
+0x40211c0d: scan_pm_channel_op_cb at ?? line ?
+0x40214f8d: cnx_node_search at ?? line ?
+0x4020d27d: hostap_input at ?? line ?
+0x40213e38: cnx_sta_scan_cmd at ?? line ?
+0x402086c8: DefFreqCalTimerCB at ?? line ?
+0x402082fa: pp_tx_idle_timeout at ?? line ?
+0x40207c3f: ppPeocessRxPktHdr at ?? line ?
+0x4021fa96: wifi_set_status_led_output_level at ?? line ?
+
+
+
+Exception (29):
+epc1=0x40210333 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000019 depc=0x00000000
+
+ctx: sys 
+sp: 3ffffca0 end: 3fffffb0 offset: 01a0
+
+>>>stack>>>
+3ffffe40:  3ffed9e8 0000010f 3ffed9e8 0000010f  
+3ffffe50:  3ffffe70 40210443 3ffed23c 00000000  
+3ffffe60:  4022f826 3ffee57c 3ffed9e8 00000064  
+3ffffe70:  00000018 3ffed95c 3ffe8c1a 3ffe8c1a  
+3ffffe80:  3fff0d5f 00000006 3fff05ac 0000000f  
+3ffffe90:  40211fe7 3ffed910 3ffed9e8 0000010f  
+3ffffea0:  00000001 0000000c 4022daa4 00000000  
+3ffffeb0:  40211c9c 40211c70 3ffed910 0000010f  
+3ffffec0:  40213a51 40211c70 0000010f 0000000a  
+3ffffed0:  3ffed2c0 40213a18 00000001 00000012  
+3ffffee0:  40211c66 3ffee57c 3ffed910 0000010f  
+3ffffef0:  40211c0d 00000001 00000012 0000010f  
+3fffff00:  40212100 00000001 3ffed910 0000010f  
+3fffff10:  40211b88 3ffed3b0 3fff05ac 40232fd0  
+3fffff20:  3ffed338 00000000 40214080 40213e38  
+3fffff30:  0000010f 3ffee080 98833ce0 60000600  
+3fffff40:  40213d12 3fff05b0 00100000 3fffdab0  
+3fffff50:  40213ff2 3fff05b0 3ffee080 98833ce0  
+3fffff60:  3fff05ac 40214012 3ffed23c 00000000  
+3fffff70:  4021c715 3fff05b0 3ffee080 9882f5d7  
+3fffff80:  4021c75a 3fffdab0 00000000 3fffdcb0  
+3fffff90:  3ffee0a8 3fffdad0 3ffeec74 40205e97  
+3fffffa0:  40000f49 40000f49 3fffdab0 40000f49  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+.......
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+
+DECODED:
+0x40210443: ieee80211_send_probereq at ?? line ?
+0x4022f826: phy_after_init_enrx at ?? line ?
+0x40211fe7: scan_remove_probe_ssid at ?? line ?
+0x4022daa4: chip_v6_rxmax_ext_dig at ?? line ?
+0x40211c9c: scan_pm_channel_op_cb at ?? line ?
+0x40211c70: scan_pm_channel_op_cb at ?? line ?
+0x40213a51: chm_start_op at ?? line ?
+0x40211c70: scan_pm_channel_op_cb at ?? line ?
+0x40213a18: chm_start_op at ?? line ?
+0x40211c66: scan_pm_channel_op_cb at ?? line ?
+0x40211c0d: scan_pm_channel_op_cb at ?? line ?
+0x40212100: scan_clear_channles at ?? line ?
+0x40211b88: scan_start at ?? line ?
+0x40232fd0: sleep_reset_analog_rtcreg_8266 at ?? line ?
+0x40214080: cnx_start_handoff_cb at ?? line ?
+0x40213e38: cnx_sta_scan_cmd at ?? line ?
+0x40213d12: cnx_sta_connect_cmd at ?? line ?
+0x40213ff2: cnx_connect_timeout at ?? line ?
+0x40214012: cnx_auth_timeout at ?? line ?
+0x4021c715: ets_timer_handler_isr at ?? line ?
+0x4021c75a: ets_timer_handler_isr at ?? line ?
+0x40205e97: loop_task at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+
+
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff157c 40203980  
+3ffefc30:  00000043 1159cfb8 3ffeeaf8 00000000  
+3ffefc40:  4021d92e 3ffeec6c 00000000 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 4020152f  
+3ffefc70:  00000000 000e36d7 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+DECODED:
+0x40203980: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027d1: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x4020152f: delay at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_wiring.c line 50
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 0015bd67 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff16a4 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 00063154 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+
+DECODED (2 above):
+0x40203980: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x402055dd: Adafruit_NeoPixel::show() at /Users/plamena/Documents/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.cpp line 1971
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027d1: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+Exception (28):
+epc1=0x402038bc epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000008 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 00000043 3fff1724 402038a3  
+3ffefc30:  00000080 0598060a 3ffeeaf8 00000000  
+3ffefc40:  4021d92e 3ffeec6c 00000000 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027cc  
+3ffefc60:  3ffe8800 ff01000a 00000001 4020152f  
+3ffefc70:  00000000 00049539 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+..
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+DECODED:
+0x402038a3: UdpContext::_reserve(unsigned int) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) UdpContext::append(char const*, unsigned int) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/include/UdpContext.h line 237
+:  (inlined by) WiFiUDP::write(unsigned char const*, unsigned int) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 204
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027cc: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 159
+0x4020152f: delay at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_wiring.c line 50
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 00092dc7 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+...
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+DECODED:
+0x40203980: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x402055dd: Adafruit_NeoPixel::show() at /Users/plamena/Documents/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.cpp line 1971
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027d1: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+Exception (28):
+epc1=0x40203982 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff15fc 40203980  
+3ffefc30:  00000043 0b428f40 3ffeeaf8 00000000  
+3ffefc40:  4021d92e 3ffeec6c 00000000 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027d1  
+3ffefc60:  3ffe8800 ff01000a 00000001 4020152f  
+3ffefc70:  00000000 00093981 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+DECODED:
+0x40203980: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027d1: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x4020152f: delay at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_wiring.c line 50
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+
+Exception (28):
+epc1=0x402038bc epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000008 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 00000043 3fff15fc 402038a3  
+3ffefc30:  00000080 3ffee959 0000012b 402055dd  
+3ffefc40:  4021d92e 00000062 3ffee770 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 402027cc  
+3ffefc60:  3ffe8800 ff01000a 00000001 3ffeec74  
+3ffefc70:  3fffdad0 00038a6d 3ffee76c 40202849  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f28  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+.........................................................................................
+
+DECODED:
+0x402038a3: UdpContext::_reserve(unsigned int) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) UdpContext::append(char const*, unsigned int) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/include/UdpContext.h line 237
+:  (inlined by) WiFiUDP::write(unsigned char const*, unsigned int) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 204
+0x402055dd: Adafruit_NeoPixel::show() at /Users/plamena/Documents/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.cpp line 1971
+0x4021d92e: wifi_get_opmode at ?? line ?
+0x402027cc: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 159
+0x40202849: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 291
+0x40205f28: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
+
+
+Exception (28):
+epc1=0x402039c2 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000004 depc=0x00000000
+
+ctx: cont 
+sp: 3ffefa80 end: 3ffefca0 offset: 01a0
+
+>>>stack>>>
+3ffefc20:  000000c3 3ffee95a 3fff157c 402039c0  
+3ffefc30:  00000043 0433dcfc 3ffeeaf8 00000000  
+3ffefc40:  4021d96e 3ffeec6c 00000000 3ffeec74  
+3ffefc50:  3fffdad0 3ffee95a 3ffee658 40202810  
+3ffefc60:  3ffe8800 ff01000a 00000001 40202331  
+3ffefc70:  3fffdad0 00037173 3ffee76c 40202891  
+3ffefc80:  3fffdad0 00000000 3ffeec6c 40205f68  
+3ffefc90:  feefeffe feefeffe 3ffeec80 40100718  
+<<<stack<<<
+
+ ets Jan  8 2013,rst cause:2, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v60000318
+~ld
+⸮LED_BUILTIN enabled
+Attempting to connect to WPA network...
+SSID: Balloon Network
+hostString: buttonNode
+....
+Connected to Balloon Network
+IP address: 10.0.1.3
+mDNS responder started
+
+DECODED:
+0x402039c0: UdpContext::send(ip_addr*, unsigned short) at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 67
+:  (inlined by) WiFiUDP::endPacket() at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/libraries/ESP8266WiFi/src/WiFiUdp.cpp line 191
+0x4021d96e: wifi_get_opmode at ?? line ?
+0x40202810: sendButtonState() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 162
+0x40202331: makeMessageBuffer() at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 142
+0x40202891: loop at /Users/plamena/Documents/Projects/MIRR files/MIRR/buttonController_MIRR/buttonController_MIRR.ino line 297
+0x40205f68: loop_wrapper at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/core_esp8266_main.cpp line 56
+0x40100718: cont_norm at /Users/plamena/Library/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266/cont.S line 109
+
