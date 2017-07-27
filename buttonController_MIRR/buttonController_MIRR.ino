@@ -59,7 +59,8 @@ int destPort = 6001;
 OSCErrorCode error;
 
 void connectWiFi() {
-
+  
+  WiFi.disconnect();
   Serial.println("Attempting to connect to WPA network...");
   Serial.print("SSID: ");
   Serial.println(ssid);
@@ -67,7 +68,13 @@ void connectWiFi() {
   Serial.println(hostString);
 
   WiFi.hostname(hostString);
+  if (WiFi.status() != WL_CONNECTED) {
   WiFi.begin(ssid, pass);
+  }
+  else {
+    Serial.println("Already connected to network.");
+    return;
+  }
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -127,7 +134,7 @@ void readButtons(){
     
   }
  // digitalWrite(LED_BUILTIN, MCPArray[buttonMapping.chipId].digitalRead(buttonMapping.pinNumber));
-  
+ // Serial.println("Reading buttons");
 }
 
 void clearButtons(){
@@ -153,12 +160,11 @@ void makeMessageBuffer() {
 }
 
 int sendButtonState() {
-
   Udp.beginPacket(broadcastIP, destPort);
   Udp.write(messageBuffer);
   Udp.endPacket();
 
-  //Serial.println(buttonBuffer);
+//  Serial.println("Sending button state");
 }
 
 void populateLightTimers() {
@@ -273,13 +279,17 @@ void setup() {
 
 void loop() {
   //return;  //debug
+  //Serial.println(millis());
   if (WiFi.status() != WL_CONNECTED) {
-    connectWiFi();
-    startMDNS();
+//    connectWiFi();
+//    startMDNS();
+      Serial.println("Connection dropped. Resetting.");
+      ESP.reset();
   }
   if (next_rx_ms <= millis()) {
     next_rx_ms = next_rx_ms + rx_interval_ms; // Time to RX a status message
     readButtons();
+    ESP.wdtFeed();
     populateLightTimers();
     setLightColor();
   }
@@ -287,8 +297,11 @@ void loop() {
     next_tx_ms = next_tx_ms + tx_interval_ms; // Time to TX a status message
     makeMessageBuffer();
     sendButtonState();
+    ESP.wdtFeed();
     clearButtons();
   }
  
   delay(1);
+  //Serial.println(millis());
 }
+
