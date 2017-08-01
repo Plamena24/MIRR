@@ -247,6 +247,9 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
 
   strip.begin();
+  for (int i=0; i<strip.numPixels(); i++){
+    strip.setPixelColor(i, Wheel((i*2) & 255));
+  }
   strip.show(); // Initialize all pixels to 'off'
 
   populateButtonMapping();
@@ -270,9 +273,14 @@ void setup() {
 
 void loop() {
   //return;  //debug
+  if (WiFi.status() != WL_CONNECTED) {
+    connectWiFi();
+    startMDNS();
+  }
   if (next_rx_ms <= millis()) {
     next_rx_ms = next_rx_ms + rx_interval_ms; // Time to RX a status message
     readButtons();
+    ESP.wdtFeed();
     populateLightTimers();
     setLightColor();
   }
@@ -280,6 +288,7 @@ void loop() {
     next_tx_ms = next_tx_ms + tx_interval_ms; // Time to TX a status message
     makeMessageBuffer();
     sendButtonState();
+    ESP.wdtFeed();
     clearButtons();
   }
  
