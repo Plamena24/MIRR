@@ -10,26 +10,31 @@ H = "hold"
 HC = "holdcounter"
 TR = "triggered_buttons"
 
+#key_list  = (T, TC, H, HC, TR)
+#for key in key_list:
+#    if key in TRACK:
+#        del TRACK[key]
 
 button_speeds = 0
 button_angles = [1500]*98
 a = button_speeds
-hold_interval_s = td(seconds = 2)
+hold_interval_s = td(seconds = 10)
 run_interval_us = td(microseconds = 5000)
 
 TRACK[T] = dt.now() + run_interval_us
 
+if TR not in TRACK:
+    TRACK[TR] = {}
+    TRACK[HC] = {}
+
 def triggered():
     for index, button in enumerate(buttons):
-        if TR not in TRACK:
-            TRACK[TR] = {}
-            TRACK[TC] = {}
-            if button == 1:
+        if button == 1:
+            if index not in TRACK[TR]:
                 TRACK[TR][index] = dt.now()
-                TRACK[HC][index] += 1
-        elif TR in TRACK:
-            if (button == 1) and (index not in TRACK[TR].keys()):
-                TRACK[TR][index] = dt.now()
+            if index not in TRACK[HC]:
+                TRACK[HC][index] = 1
+            else:
                 TRACK[HC][index] += 1
     if TRACK[TR]:
         print TRACK[TR]
@@ -38,14 +43,18 @@ def triggered():
 
 def hold_action(current_time):
     triggered()
-    live_buttons = copy.deepcopy(triggered_buttons)
-    for key, time in triggered_buttons.items():
-        if ((time - dt.now()) >= (hold_interval_s * hold_counter[key])) and (key not in triggered_buttons):
-                live_buttons[proximity.Branch(*key)] = dt.now()
-                hold_counter[key] += 1
+    live_buttons = copy.deepcopy(TRACK[TR])
+    for key, time in TRACK[TR].items():
+#        print proximity.Branch(key)
+#        print abs(time - dt.now()).seconds
+#        print (hold_interval_s * TRACK[HC][key]).seconds
+        if (abs(time - dt.now()).seconds >= (hold_interval_s * TRACK[HC][key]).seconds):
+                live_buttons[proximity.Branch(key)] = dt.now()
+                TRACK[HC][key] += 1
                 print proximity.Branch(key)
-    print live_buttons
-    print hold_counter
+#    TRACK[TR] = live_buttons
+#    print TRACK[TR]
+#    print TRACK[HC]
 
 
 #def ticker(current_time):
