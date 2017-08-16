@@ -3,7 +3,7 @@ import Grasshopper as gh
 import scriptcontext as sc
 
 STEP = sc.sticky
-S = "next_step"
+S = "index"
 
 def updateComponent():
     
@@ -31,12 +31,12 @@ for x in range(1, 1001):
 if S not in STEP:
     STEP[S] = 0
 else:
-    if STEP[S] == 1000:
-        STEP[S] = 1
-        Foo = eval_list[STEP[S]]
+    if STEP[S] == 999:
+        STEP[S] = 0
+        t = eval_list[STEP[S]]
     else:
-        Foo = eval_list[STEP[S]]
-        print Foo
+        t = eval_list[STEP[S]]
+        print t
         print STEP[S]
         STEP[S] += 1
 
