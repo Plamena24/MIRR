@@ -9,7 +9,7 @@ TC = "tickcounter"
 H = "hold"
 P = "panel"
 B = "buttons"
-A = "angles"
+S = "status"
 
 #key_list  = (T, TC, H, HC, TR)
 #for key in key_list:
@@ -48,17 +48,21 @@ def button_status():
 def panel_status(current_time):
     if P not in TRACK:
         TRACK[P] = {}
+    if S not in TRACK:
+        TRACK[S] = [0]*98
     if TRACK[B]:
         for key, effect in TRACK[B].items():
-            if TRACK[B][button].start:
-                if (abs(effect - current_time)).seconds >= hold_interval_s.seconds:
+            if (abs(effect - current_time)).seconds % hold_interval_s.seconds = 0:
+                if TRACK[B][key].start:  
                     for neighbor in proximity.Branch(key):
-                        if neighbor not in live_buttons:
-                            live_buttons[neighbor] = dt.now()
-                        if neighbor not in TRACK[HC]:
-                            TRACK[HC][neighbor] = 1
-                        else:
-                            TRACK[HC][neighbor] += 1
+                        if neighbor not in TRACK[P]:
+                            TRACK[P][neighbor] = current_time
+                            TRACK[S][key] = 1
+                            TRACK[S][neighbor] = 1
+                elif TRACK[B][key].end:
+                    for neighbor in proximity.Branch(key):
+
+
 
 
 
