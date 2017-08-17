@@ -39,25 +39,26 @@ def button_status():
         if button == 1:
             if index not in TRACK[B]:
                 TRACK[B][index] = Effect(dt.now(), True)
-        else:
-            if index in TRACK[B]:
-                TRACK[B][index] = Effect(dt.now(), False)
             elif TRACK[B][index].end:
-                del TRACK[B][index]
+                TRACK[B][index] = Effect(dt.now(), True)
+        else:
+            if TRACK[B][index].start:
+                TRACK[B][index] = Effect(dt.now(), False)
 
 def panel_status(current_time):
     if P not in TRACK:
         TRACK[P] = {}
     if TRACK[B]:
-        for button, effect in TRACK[B].items():
-            if (abs(time - current_time).seconds >= (hold_interval_s * TRACK[HC][key]).seconds):
-                for neighbor in proximity.Branch(key):
-                    if neighbor not in live_buttons:
-                        live_buttons[neighbor] = dt.now()
-                    if neighbor not in TRACK[HC]:
-                        TRACK[HC][neighbor] = 1
-                    else:
-                        TRACK[HC][neighbor] += 1
+        for key, effect in TRACK[B].items():
+            if TRACK[B][button].start:
+                if (abs(effect - current_time)).seconds >= hold_interval_s.seconds:
+                    for neighbor in proximity.Branch(key):
+                        if neighbor not in live_buttons:
+                            live_buttons[neighbor] = dt.now()
+                        if neighbor not in TRACK[HC]:
+                            TRACK[HC][neighbor] = 1
+                        else:
+                            TRACK[HC][neighbor] += 1
 
 
 
