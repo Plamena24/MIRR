@@ -1,7 +1,7 @@
-import grasshopper as gh
 from datetime import datetime as dt, timedelta as td
 import scriptcontext
 import copy
+import Grasshopper as gh
 
 TRACK = scriptcontext.sticky
 P = "panel"
@@ -101,23 +101,26 @@ def set_angles():
             button_angles[index] = flip_angle()
 
 def flip_angle():
-    pass
-    #return new_angle 
+    new_angle = 1500
+    if TRACK[T] % 2 == 0:
+        new_angle = 1425
+    else:
+        new_angle = 1525
+    return new_angle
 
-def ticker():
-    pass
 
-# def flipper(remainder, current_time):
-#   flip = hold_action(current_time)
-#   for index, button in enumerate(flip):
-#       if not flip:
-#           if remainder % 2 == 0:
-#               button_angles[index] = 1425
-#           else:
-#               button_angles[index] = 1525
+if T not in TRACK:
+    TRACK[T] = 0
+else:
+    if TRACK[T] == 999:
+        TRACK[T] = 0
+        b = button_angles
+    else:
+        b = button_angles
+        print b
+        print TRACK[T]
+        TRACK[T] += 1
 
-     
-
-hold_action(dt.now())    
-print button_angles
-b = button_angles
+# Update the component
+if start:
+    updateComponent()
