@@ -58,7 +58,9 @@ def button_status():
                 TRACK[B][index] = Effect(dt.now(), True)
                 TRACK[B][index] = None
         else:
-            if TRACK[B][index].start != None:
+            if index not in TRACK[B]:
+                pass
+            elif TRACK[B][index].start != None:
                 TRACK[B][index] = Effect(dt.now(), False)
                 TRACK[B][index].start = None
 
@@ -98,29 +100,35 @@ def panel_status():
 def set_angles():
     for index, status in enumerate(TRACK[S]):
         if status == 1:
-            button_angles[index] = flip_angle()
+            button_angles[index] = flip_angle(TRACK[T])
 
-def flip_angle():
+def flip_angle(tick):
     new_angle = 1500
-    if TRACK[T] % 2 == 0:
+    if tick % 2 == 0:
         new_angle = 1425
     else:
         new_angle = 1525
     return new_angle
 
-
-if T not in TRACK:
-    TRACK[T] = 0
-else:
-    if TRACK[T] == 999:
+def ticker():
+    if T not in TRACK:
         TRACK[T] = 0
-        b = button_angles
     else:
-        b = button_angles
-        print b
-        print TRACK[T]
-        TRACK[T] += 1
+        if TRACK[T] == 999:
+            TRACK[T] = 0
+        else:
+            TRACK[T] += 1
+ticker()
+button_status()
+button_trigger(dt.now())
+panel_status()
+set_angles()
+
+print TRACK[T]
+print button_angles
+b = button_angles
 
 # Update the component
 if start:
     updateComponent()
+
