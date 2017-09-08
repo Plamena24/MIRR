@@ -9,7 +9,7 @@ B = "buttons"
 S = "status"
 T = "tick"
 
-#key_list  = (T, TC, H, HC, TR)
+#key_list  = (P, B, S, T)
 #for key in key_list:
 #    if key in TRACK:
 #        del TRACK[key]
@@ -54,6 +54,8 @@ def button_status():
         if button == 1:
             if index not in TRACK[B]:
                 TRACK[B][index] = Effect(dt.now(), True)
+            elif TRACK[B][index].start != None:
+                print TRACK[B][index].start
             elif TRACK[B][index].end != None:
                 TRACK[B][index] = Effect(dt.now(), True)
                 TRACK[B][index] = None
@@ -68,24 +70,28 @@ def button_trigger(current_time):
     if P not in TRACK:
         TRACK[P] = {}
         for value in range(0, 98):
-            TRACK[P][value] = 0
+            TRACK[P][value] = None
     if TRACK[B]:
         for key, effect in TRACK[B].items():
-            if (abs(effect - current_time)).seconds % hold_interval_s.seconds == 0:
-                if TRACK[B][key].start != None:  
+            print effect.start
+            if effect.start != None: 
+                if (abs(effect.start - current_time)).seconds % hold_interval_s.seconds == 0:
                     TRACK[P][key] = TRACK[B][key]
-                    panel_trigger(True)
-                elif TRACK[B][key].end != None:
-                    panel_trigger(False, key)
+                    panel_trigger(True, current_time)
+            elif effect.end != None:
+                if (abs(effect.end - current_time)).seconds % hold_interval_s.seconds == 0:
+                    panel_trigger(False, current_time, key)
+        print TRACK[B]
+        print TRACK[P]
 
-def panel_trigger(start, key = None):
+def panel_trigger(start, time, key = None):
     if start:
         for panel in TRACK[P]:
             for neighbor in proximity.Branch(panel):
-                TRACK[P][neighbor] = current_time
+                TRACK[P][neighbor] = time
     else: 
         for panel, effect in TRACK[P].items():
-            if (abs(effect - TRACK[B][key])).seconds == hold_interval_s.seconds:
+            if (abs(effect.end - TRACK[B][key])).seconds == hold_interval_s.seconds:
                 TRACK[P][panel] = None
                 TRACK[B][key] = effect
 
@@ -96,11 +102,13 @@ def panel_status():
         for panel, status in TRACK[P].items():
             if status != None:
                 TRACK[S][panel] = 1
+    print TRACK[S]
 
 def set_angles():
     for index, status in enumerate(TRACK[S]):
         if status == 1:
             button_angles[index] = flip_angle(TRACK[T])
+        #print button_angles
 
 def flip_angle(tick):
     new_angle = 1500
