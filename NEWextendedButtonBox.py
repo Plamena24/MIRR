@@ -54,11 +54,10 @@ def button_status():
         if button == 1:
             if index not in TRACK[B]:
                 TRACK[B][index] = Effect(dt.now(), True)
-            elif TRACK[B][index].start != None:
-                print TRACK[B][index].start
+            #elif TRACK[B][index].start != None:
+                #print TRACK[B][index].start
             elif TRACK[B][index].end != None:
-                TRACK[B][index] = Effect(dt.now(), True)
-                TRACK[B][index] = None
+                del TRACK[B][index] 
         else:
             if index not in TRACK[B]:
                 pass
@@ -73,28 +72,42 @@ def button_trigger(current_time):
             TRACK[P][value] = None
     if TRACK[B]:
         for key, effect in TRACK[B].items():
-            print effect.start
+            #print effect.start, "Start timestamp"
             if effect.start != None: 
                 if (abs(effect.start - current_time)).seconds % hold_interval_s.seconds == 0:
-                    TRACK[P][key] = TRACK[B][key]
-                    panel_trigger(True, current_time)
+                    TRACK[P][key] = effect.start
+                    panel_trigger(True, current_time, key)
             elif effect.end != None:
-                if (abs(effect.end - current_time)).seconds % hold_interval_s.seconds == 0:
-                    panel_trigger(False, current_time, key)
-        print TRACK[B]
-        print TRACK[P]
+                #if (abs(effect.end - current_time)).seconds % hold_interval_s.seconds == 0:
+                    #print effect.end, "End timestamp"
+                panel_trigger(False, current_time, key)
+#        print TRACK[B]
+#        print TRACK[P]
 
 def panel_trigger(start, time, key = None):
     if start:
-        for panel in TRACK[P]:
-            for neighbor in proximity.Branch(panel):
-                TRACK[P][neighbor] = time
+        for panel, timestamp in TRACK[P].items():
+            if timestamp != None:
+                for neighbor in proximity.Branch(panel):
+                    if TRACK[P][neighbor] == None:
+                        TRACK[P][neighbor] = time
     else: 
-        for panel, effect in TRACK[P].items():
-            if (abs(effect.end - TRACK[B][key])).seconds == hold_interval_s.seconds:
-                TRACK[P][panel] = None
-                TRACK[B][key] = effect
-
+        #print TRACK[B][key].end
+        for panel, timestamp in TRACK[P].items():
+            #print timestamp, "panel trigger end"
+            #print TRACK[B][key].end
+            print timestamp
+            if timestamp != None:
+                #print "Timestamp is not None"
+                #print timestamp, TRACK[B][key].end
+                print (abs(timestamp - TRACK[B][key].end)).seconds
+                if (abs(timestamp - TRACK[B][key].end)).seconds >= hold_interval_s.seconds:
+                    print "Ending"
+                    TRACK[B][key].end = timestamp
+                    TRACK[P][panel] = None
+        #print TRACK[P]
+                    
+ 
 def panel_status():
     if S not in TRACK:
         TRACK[S] = [0]*98
@@ -139,4 +152,7 @@ b = button_angles
 # Update the component
 if start:
     updateComponent()
+
+
+
 
